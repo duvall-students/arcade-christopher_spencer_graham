@@ -1,5 +1,7 @@
-package game_objects;
+package game_object;
 
+
+import java.io.FileNotFoundException;
 
 import javafx.geometry.Point2D;
 
@@ -18,9 +20,9 @@ public class Brick extends Obstacle{
 	protected int scoreValue;
 	
 	
-	public Brick(ImageView imageView) {
+	public Brick(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		
-		super(imageView);
+		super(imagePath, sizeWidth, sizeHeight, pos);
 		scoreValue = getRandomInRange(MIN_SCORE_VALUE, MAX_SCORE_VALUE);
 		
 		

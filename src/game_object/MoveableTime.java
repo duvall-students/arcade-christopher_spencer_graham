@@ -1,9 +1,10 @@
-package game_objects;
+package game_object;
 
 import javafx.scene.input.KeyCode;
 
 //Written by Graham Young
-public interface MovableTime {
+public interface MoveableTime {
+	
 	
 	//move the implementation based on time
 	public void move(double elapsedTime);
