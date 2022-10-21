@@ -1,6 +1,8 @@
-package game_objects;
+package game_object;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Random;
 
@@ -18,19 +20,26 @@ public abstract class GameObject implements Collider {
 	
 	
 	
-	public GameObject(ImageView imageView) {
-		myView = imageView;
+	public GameObject(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+		Image image = new Image(new FileInputStream(imagePath));
+        myView = new ImageView(image);
+        // make sure it stays a circle
+        
+        myView.setFitWidth(sizeWidth);
+        myView.setFitHeight(sizeHeight);
+        // make sure it stays within the bounds
+        myView.setX(pos.getX());
+        myView.setY(pos.getY());
 
 	}
 	
 
 	
-	"""
 	protected int getRandomInRange (int min, int max) {
 		Random dice = new Random();
         return min + dice.nextInt(max - min) + 1;
     }
-	"""
+
 	
 	public Node getView() {
 		return myView;
@@ -51,21 +60,8 @@ public abstract class GameObject implements Collider {
 	}
 
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(myVelocity);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GameObject other = (GameObject) obj;
-		return  Objects.equals(myVelocity, other.myVelocity);
-	}
+
+
 
 }
