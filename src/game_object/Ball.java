@@ -8,16 +8,16 @@ import javafx.scene.input.KeyCode;
 //Written by Graham Young
 
 
-public class Ball extends Projectile implements MovableTime{
+public class Ball extends Projectile{
 
 	
-	protected static final int MOVE_SPEED = 200;
+	protected static final int DEFAULT_MOVE_SPEED = 200;
 
 	
 	public Ball(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
-		
-		super.myVelocity = new Point2D(MOVE_SPEED, -MOVE_SPEED);
+		super.myMoveSpeed = DEFAULT_MOVE_SPEED;
+		super.myVelocity = new Point2D(DEFAULT_MOVE_SPEED, -DEFAULT_MOVE_SPEED);
 		
 	}
 	
