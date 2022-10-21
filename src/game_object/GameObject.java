@@ -50,7 +50,10 @@ public abstract class GameObject implements Collider {
 		return myView.intersects(other.getView().getBoundsInParent());
 	}
 	
-
+	@Override
+	public void collide(Collider collider) {
+		//To do
+	}
 		
 
 

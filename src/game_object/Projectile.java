@@ -15,7 +15,9 @@ public class Projectile extends GameObject implements MoveableTime{
 
 	@Override
 	public void move(double elapsedTime) {
-		// TODO Auto-generated method stub
+
+        myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
+        myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 		
 	}
 }

@@ -50,7 +50,7 @@ import java.awt.GraphicsDevice;
  * 5. The grower currently only grows horizontally, changing the square to a rectangle.  Change
  *    this to grow in both directions equally so the square shape is preserved.
  */
-public class BreakoutScene extends Application {
+public class BreakoutScene extends GameScene {
 	// some things we need to remember during our game
 	private static final String PONG_SOUND = "resources/pong_beep.wav"; 
 	private Scene myScene;

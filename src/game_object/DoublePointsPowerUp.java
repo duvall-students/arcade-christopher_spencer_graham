@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 
 import javafx.geometry.Point2D;
 
-public abstract class PowerUp extends Obstacle {
+public class DoublePointsPowerUp extends PowerUp {
 
-	public PowerUp(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+	public DoublePointsPowerUp(String imagePath, int sizeWidth, int sizeHeight, Point2D pos)
+			throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
 		// TODO Auto-generated constructor stub
 	}
