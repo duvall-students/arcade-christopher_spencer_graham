@@ -30,26 +30,6 @@ import java.awt.GraphicsDevice;
 
 // Name: Christopher Boyette
 
-/**
- * A basic example JavaFX program for the first lab.
- * 
- * @author Shannon Duvall
- * 
- * This program animates two squares.  The top is the "mover" and 
- * the bottom is the "grower".
- * 
- * Changes for you to make in the code:
- * 
- * 1. Currently the mover is rotating counter-clockwise.  Add code so the grower
- * 	  rotates in the opposite direction (clockwise).
- * 2. If the mover and grower ever intersect, the mover should change color to be HIGHLIGHT,
- *    and change back to the MOVER_COLOR if not intersecting.
- * 3. If any of the bouncing blue balls intersect the grower, the grower should change color
- *    to be HIGHLIGHT, and change back when not intersecting.
- * 4. The mover can currently only move up and down.  Enable left and right movement with arrow keys.
- * 5. The grower currently only grows horizontally, changing the square to a rectangle.  Change
- *    this to grow in both directions equally so the square shape is preserved.
- */
 public class BreakoutScene extends GameScene {
 	// some things we need to remember during our game
 	private static final String PONG_SOUND = "resources/pong_beep.wav"; 
@@ -67,13 +47,12 @@ public class BreakoutScene extends GameScene {
 	Timeline animation = new Timeline();
 	Images image = new Images();
 	ArrayList<Integer> specialBricks;
-	GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+	private GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 	private int screenHeight;
 	private int screenWidth;
 	private int levelsCompleted = 0;
 	private int currentLevel = 1;
 	private MediaPlayer pongSound;
-	private Random dice = new Random();
 
 	/**
 	 * Initialize what will be displayed and how it will be updated.
@@ -312,10 +291,10 @@ public class BreakoutScene extends GameScene {
 			doubleBricks.remove(doubleBricks.get(doubleBricks.size()-1));
 		}
 	}
-
-	public int setRandomBrick(int numBricks) {
-		Random ran = new Random();
-		return ran.nextInt(numBricks);
+	
+	public void setScreenSize(GraphicsDevice gd[]) {
+		screenWidth = gd[0].getDisplayMode().getWidth();
+		screenHeight = gd[0].getDisplayMode().getHeight();
 	}
 
 	private int getRandomInRange (int min, int max) {
