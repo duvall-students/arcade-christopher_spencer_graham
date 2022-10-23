@@ -23,7 +23,5 @@ public class Player extends GameObject implements MoveableKeyCode {
 	        	myView.setX(myView.getX() + moveSpeed);
 	        }
 		
-		
-
 	}
 }
