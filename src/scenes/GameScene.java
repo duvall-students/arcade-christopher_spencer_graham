@@ -10,8 +10,9 @@ import game_object.GameObject;
 import game_object.Collider;
 import game_object.MoveableKeyCode;
 import game_object.MoveableTime;
+import game_object.Obstacle;
 import game_object.Player;
-
+import game_object.Projectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -33,25 +34,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public abstract class GameScene extends Application {
 
 	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-	protected int screenHeight;
-	protected int screenWidth;
+
+	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
+
 	protected static final Paint BACKGROUND = Color.BLACK;
 	protected Scene myScene;
 	protected Timeline animation = new Timeline();
 	protected static final int FRAMES_PER_SECOND = 60;
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	protected Group root = new Group();
-	protected Collection<Text> texts;
-	protected Collection<GameObject> gameObjects;
-	protected Collection<Collider> colliders;
-	protected Collection<MoveableTime> moveableTimes;
-	protected Collection<MoveableKeyCode> moveableKeyCodes;
-	protected Player myPlayer;
-	protected static final int PLAYER_MOVE_SPEED = 20;
+
+
+
 	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
 	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
 	protected static final int REGULAR_FONT_SIZE = 20;
@@ -60,13 +58,25 @@ public abstract class GameScene extends Application {
 	protected static final String TEXT_FONT = "Arial";
 	protected static final Color TEXT_COLOR = Color.WHITE;
 	protected static final int PLAYER_STARTING_SCORE = 0;
+
+	
+	protected Group root = new Group();
+	protected Collection<Text> texts;
+	protected Collection<GameObject> gameObjects;
+	protected Collection<Collider> colliders;
+	protected Collection<MoveableTime> moveableTimes;
+	protected Collection<MoveableKeyCode> moveableKeyCodes;
+	protected Player myPlayer;
+
 	protected int playerLives = 3;
 	
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
-		screenWidth = (9*gd[0].getDisplayMode().getWidth())/10;
-		screenHeight = (9*gd[0].getDisplayMode().getHeight())/10;
+
+		double screenWidth = screenSize.getX();
+		double screenHeight = screenSize.getY();
+
 		myScene = setupGame(screenWidth, screenHeight, BACKGROUND);
 		stage.setScene(myScene);
 		stage.show();
@@ -82,17 +92,57 @@ public abstract class GameScene extends Application {
 		animation.play();
 	}
 	
-	protected Scene setupGame (int width, int height, Paint background) {
+
+	protected Scene setupGame (double width, double height, Paint background) {
+		gameObjects = new ArrayList<GameObject>();
+		colliders = new ArrayList<Collider>();
+		moveableTimes = new ArrayList<MoveableTime>();
+		moveableKeyCodes = new ArrayList<MoveableKeyCode>();
+		
+		Level level = setupLevel();
+		
+		
+		
+		addObjectstoCollectionsFromLevel(level.getPlayers());
+		addObjectstoCollectionsFromLevel(level.getObstacles());
+		addObjectstoCollectionsFromLevel(level.getProjectiles());
+		
+
 		//setUpLevel();
 		//createLevel();
 		//createPlayer();
 		//createProjectiles();
 		//root.getChildren().add(myPlayer.getView()); 
 		Scene scene = new Scene(root, width, height, background);
-		//scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+
 		return scene;
 	}
 	
+	
+	
+	private void addObjectstoCollectionsFromLevel(List<? extends GameObject> list) {
+		
+		for(int i = 0; i <= list.size(); i++) {
+			GameObject t = list.get(i);
+			gameObjects.add(t);
+			colliders.add(t);
+			try {
+				moveableTimes.add((MoveableTime)t);
+			}
+			catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+			try {
+				moveableKeyCodes.add((MoveableKeyCode)t);
+			}
+			catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+			root.getChildren().add(t.getView());
+		}
+	}
+	
+
 	protected abstract void createDisplays();
 	
 	protected void setupLevel(int width, int height) {
@@ -103,7 +153,11 @@ public abstract class GameScene extends Application {
 		//myPlayer.move(PLAYER_MOVE_LEFT, PLAYER_MOVE_SPEED);
 		//myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
 	}
+
+	protected abstract void handleKeyInput(KeyCode keyCode);
+
 	
+
 	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));
