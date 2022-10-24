@@ -40,11 +40,11 @@ public class Spaceship extends Player {
 		move(keyCode, SPACESHIP_MOVE_SPEED);
 	}
 	
-	public Laser shoot(KeyCode keyCode, String laserImagePath, int laserWidth, int laserHeight) {
+	public Laser shoot(KeyCode keyCode, Point2D screenSize) {
 		Laser laser = null;
 		if (keyCode == KeyCode.UP) {
 			try {
-				laser = new Laser(laserImagePath, laserWidth, laserHeight, new Point2D(myView.getX(), myView.getY()));
+				laser = new Laser(screenSize, new Point2D(myView.getX(), myView.getY()+1));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

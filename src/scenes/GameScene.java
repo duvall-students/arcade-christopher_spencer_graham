@@ -147,6 +147,9 @@ public abstract class GameScene extends Application {
 		//myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
 	}
 	
+	protected abstract void handleKeyInput(KeyCode keyCode);
+
+	
 	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));
