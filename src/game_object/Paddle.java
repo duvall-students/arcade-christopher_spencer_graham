@@ -10,14 +10,21 @@ import javafx.scene.input.KeyCode;
 //Written by Graham Young
 public class Paddle extends Player {
 	
-	
+	public static final int PADDLE_MOVE_SPEED = 50;
 
 	public Paddle(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
 		
 	}
 
+	@Override
+	public void move(KeyCode keyCode, int moveSpeed) {
+		super.move(keyCode, moveSpeed);
+	}
 	
+	public void move(KeyCode keyCode) {
+		move(keyCode, PADDLE_MOVE_SPEED);
+	}
 	
 
 }
