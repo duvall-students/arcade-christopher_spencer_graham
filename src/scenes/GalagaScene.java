@@ -6,14 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Entities.Ball;
-import Entities.Player;
-import Settings.GameRules;
-import Settings.HighScore;
-import Settings.Sound;
-import Settings.Images;
-import Settings.Display;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -32,5 +24,9 @@ import java.awt.GraphicsDevice;
 
 public class GalagaScene extends GameScene {
 
-
+	@Override
+	protected void createDisplays() {
+		createTextDisplay(0.4*screenWidth, screenHeight/15, TEXT_FONT, GAME_TITLE_FONT_SIZE, "GALAGA", TEXT_COLOR, root);
+	}
+	
 }
