@@ -89,6 +89,7 @@ public abstract class GameScene extends Application {
 		//createProjectiles();
 		//root.getChildren().add(myPlayer.getView()); 
 		Scene scene = new Scene(root, width, height, background);
+		//scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		return scene;
 	}
 	
