@@ -77,6 +77,7 @@ public class HighScore {
 			exp.printStackTrace();
 		} 
 		return currentHighScore;
-
 	}
+	
+	
 }
