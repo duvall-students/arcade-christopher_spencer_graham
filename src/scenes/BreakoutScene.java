@@ -9,6 +9,8 @@ import javafx.util.Duration;
 
 public class BreakoutScene extends GameScene {
 	// some things we need to remember during our game
+	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+
 	
 	@Override
 	protected void createDisplays() {
