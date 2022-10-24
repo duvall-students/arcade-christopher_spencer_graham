@@ -15,10 +15,7 @@ import javafx.scene.image.ImageView;
 //Written by Graham Young
 public abstract class GameObject implements Collider {
 	
-	
 	protected ImageView myView;
-	
-	
 	
 	public GameObject(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
@@ -31,8 +28,6 @@ public abstract class GameObject implements Collider {
         myView.setY(pos.getY());
 
 	}
-	
-
 	
 	protected int getRandomInRange (int min, int max) {
 		Random dice = new Random();
