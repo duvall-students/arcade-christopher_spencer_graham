@@ -12,13 +12,13 @@ import javafx.scene.input.KeyCode;
 public class Ball extends Projectile{
 
 
-	protected static final int DEFAULT_MOVE_SPEED = 200;
+	protected static final int BALL_MOVE_SPEED = 200;
 
 
 	public Ball(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
-		super.myMoveSpeed = DEFAULT_MOVE_SPEED;
-		super.myVelocity = new Point2D(DEFAULT_MOVE_SPEED, -DEFAULT_MOVE_SPEED);
+		myMoveSpeed = BALL_MOVE_SPEED;
+		myVelocity = new Point2D(BALL_MOVE_SPEED, -BALL_MOVE_SPEED);
 
 	}
 
