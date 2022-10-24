@@ -23,7 +23,9 @@ import java.awt.GraphicsDevice;
 // Spencer Buehlman
 
 public class GalagaScene extends GameScene {
-
+	private static final String GALAGA_HIGH_SCORE_FILE_NAME = "GalagaHighScore.txt";
+	
+	
 	@Override
 	protected void createDisplays() {
 		createTextDisplay(0.4*screenWidth, screenHeight/15, TEXT_FONT, GAME_TITLE_FONT_SIZE, "GALAGA", TEXT_COLOR, root);
