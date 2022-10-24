@@ -31,7 +31,8 @@ public class Ball extends Projectile{
         myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 		}
 
-
+	
+	
 
     
 	

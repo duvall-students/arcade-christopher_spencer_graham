@@ -10,5 +10,17 @@ public class Spaceship extends Player {
 		super(imagePath, sizeWidth, sizeHeight, pos);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public boolean collide(GameObject other) {
+		boolean check = this.isIntersecting(other);
+		if (check) {
+			if (this.removeALife()) {
+				resetPosition();
+			}
+			
+		}
+		return check;
+	}
 
 }
