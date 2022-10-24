@@ -27,31 +27,40 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public abstract class GameScene extends Application {
 
-	private GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-	private int screenHeight;
-	private int screenWidth;
-	private static final Paint BACKGROUND = Color.BLACK;
-	private Scene myScene;
-	private Timeline animation = new Timeline();
-	private static final int FRAMES_PER_SECOND = 60;
-	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	private Group root = new Group();
-	private Collection<Text> texts;
-	private Collection<GameObject> gameObjects;
-	private Collection<Collider> colliders;
-	private Collection<MoveableTime> moveableTimes;
-	private Collection<MoveableKeyCode> moveableKeyCodes;
-	private Player myPlayer;
-	private static final int PLAYER_MOVE_SPEED = 20;
-	private static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
-	private static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
-	
-	public GameScene() {
-		// TODO Auto-generated constructor stub
-	}
+	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+	protected int screenHeight;
+	protected int screenWidth;
+	protected static final Paint BACKGROUND = Color.BLACK;
+	protected Scene myScene;
+	protected Timeline animation = new Timeline();
+	protected static final int FRAMES_PER_SECOND = 60;
+	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	protected Group root = new Group();
+	protected Collection<Text> texts;
+	protected Collection<GameObject> gameObjects;
+	protected Collection<Collider> colliders;
+	protected Collection<MoveableTime> moveableTimes;
+	protected Collection<MoveableKeyCode> moveableKeyCodes;
+	protected Player myPlayer;
+	protected static final int PLAYER_MOVE_SPEED = 20;
+	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
+	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
+	protected static final int REGULAR_FONT_SIZE = 20;
+	protected static final int GAME_TITLE_FONT_SIZE = 75;
+	protected static final int END_GAME_TITLE_FONT_SIZE = 20;
+	protected static final String TEXT_FONT = "Arial";
+	protected static final Color TEXT_COLOR = Color.WHITE;
+	protected static final int PLAYER_STARTING_SCORE = 0;
+	protected int playerLives = 3;
 	
 	@Override
 	public void start (Stage stage) {
@@ -61,6 +70,11 @@ public abstract class GameScene extends Application {
 		myScene = setupGame(screenWidth, screenHeight, BACKGROUND);
 		stage.setScene(myScene);
 		stage.show();
+		//texts = new Collection<Text>();
+		createTextDisplay((15.5*screenWidth)/20, screenHeight/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
+		createTextDisplay((17.5*screenWidth)/20, screenHeight/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: 0", TEXT_COLOR, root);
+		createTextDisplay((0.2*screenWidth)/20, screenHeight/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + playerLives, TEXT_COLOR, root);
+		createDisplays();
 		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -70,33 +84,38 @@ public abstract class GameScene extends Application {
 	
 	protected Scene setupGame (int width, int height, Paint background) {
 		//setUpLevel();
-		root.getChildren().add(myPlayer.getView()); 
+		//createLevel();
+		//createPlayer();
+		//createProjectiles();
+		//root.getChildren().add(myPlayer.getView()); 
 		Scene scene = new Scene(root, width, height, background);
 		return scene;
 	}
+	
+	protected abstract void createDisplays();
 	
 	protected void setupLevel(int width, int height) {
 		
 	}
 	
 	protected void step (double elapsedTime) {
-		myPlayer.move(PLAYER_MOVE_LEFT, PLAYER_MOVE_SPEED);
-		myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
+		//myPlayer.move(PLAYER_MOVE_LEFT, PLAYER_MOVE_SPEED);
+		//myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
 	}
 	
-	private void createDisplay(double xPosition, double yPosition, Font textFont, String textToDisplay, Color colorOfText, Group gameSceneImages) {
+	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
-		newDisplay.setFont(textFont);
+		newDisplay.setFont(new Font(textFont, textSize));
 		newDisplay.setX(xPosition);
 		newDisplay.setY(yPosition);
 		newDisplay.setText(textToDisplay);
 		newDisplay.setStroke(colorOfText);
 		gameSceneImages.getChildren().add(newDisplay);
-		texts.add(newDisplay);
+		//texts.add(newDisplay);
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 
 }
