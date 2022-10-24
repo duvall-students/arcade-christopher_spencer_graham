@@ -18,7 +18,6 @@ public class Laser extends Projectile {
 
 	@Override
 	public void move(double elapsedTime) {
-
 		myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 	}
 }

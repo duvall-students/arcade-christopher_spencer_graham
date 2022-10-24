@@ -65,8 +65,8 @@ public abstract class GameScene extends Application {
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
-		screenWidth = gd[0].getDisplayMode().getWidth();
-		screenHeight = gd[0].getDisplayMode().getHeight();
+		screenWidth = (9*gd[0].getDisplayMode().getWidth())/10;
+		screenHeight = (9*gd[0].getDisplayMode().getHeight())/10;
 		myScene = setupGame(screenWidth, screenHeight, BACKGROUND);
 		stage.setScene(myScene);
 		stage.show();
