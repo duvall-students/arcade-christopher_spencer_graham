@@ -15,9 +15,8 @@ import javafx.scene.image.ImageView;
 //Written by Graham Young
 public abstract class GameObject implements Collider {
 	
-	
 	protected ImageView myView;
-	
+
 	
 	
 	
@@ -32,8 +31,6 @@ public abstract class GameObject implements Collider {
         myView.setY(pos.getY());
 
 	}
-	
-
 	
 	protected int getRandomInRange (int min, int max) {
 		Random dice = new Random();

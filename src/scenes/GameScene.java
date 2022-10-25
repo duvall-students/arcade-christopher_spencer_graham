@@ -4,7 +4,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.Collection;
 import game_object.GameObject;
@@ -35,11 +34,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
+
 
 public abstract class GameScene extends Application {
 
 	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+
 	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
 
 	protected static final Paint BACKGROUND = Color.BLACK;
@@ -49,6 +49,8 @@ public abstract class GameScene extends Application {
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
+
+
 	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
 	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
 	protected static final int REGULAR_FONT_SIZE = 20;
@@ -57,8 +59,7 @@ public abstract class GameScene extends Application {
 	protected static final String TEXT_FONT = "Arial";
 	protected static final Color TEXT_COLOR = Color.WHITE;
 	protected static final int PLAYER_STARTING_SCORE = 0;
-	
-	
+
 	
 	protected Group root = new Group();
 	protected Collection<Text> texts;
@@ -66,14 +67,16 @@ public abstract class GameScene extends Application {
 	protected Collection<Collider> colliders;
 	protected Collection<Moveable> moveables;
 	protected Player myPlayer;
+
 	protected int playerLives = 3;
 	
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
-		
+
 		double screenWidth = screenSize.getX();
 		double screenHeight = screenSize.getY();
+
 		myScene = setupGame(screenWidth, screenHeight, BACKGROUND);
 		stage.setScene(myScene);
 		stage.show();
@@ -89,6 +92,7 @@ public abstract class GameScene extends Application {
 		animation.play();
 	}
 	
+
 	protected Scene setupGame (double width, double height, Paint background) {
 		gameObjects = new ArrayList<GameObject>();
 		colliders = new ArrayList<Collider>();
@@ -103,12 +107,14 @@ public abstract class GameScene extends Application {
 		addObjectsToCollectionsFromLevel(level.getObstacles());
 		addObjectsToCollectionsFromLevel(level.getProjectiles());
 		
+
 		//setUpLevel();
 		//createLevel();
 		//createPlayer();
 		//createProjectiles();
 		//root.getChildren().add(myPlayer.getView()); 
 		Scene scene = new Scene(root, width, height, background);
+
 		return scene;
 	}
 	
@@ -131,6 +137,7 @@ public abstract class GameScene extends Application {
 		}
 	}
 	
+
 	protected abstract void createDisplays();
 	
 	protected void setupLevel(int width, int height) {
@@ -141,10 +148,11 @@ public abstract class GameScene extends Application {
 		//myPlayer.move(PLAYER_MOVE_LEFT, PLAYER_MOVE_SPEED);
 		//myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
 	}
-	
+
 	protected abstract void handleKeyInput(KeyCode keyCode);
 
 	
+
 	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));

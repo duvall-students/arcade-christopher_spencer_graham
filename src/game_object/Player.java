@@ -35,6 +35,7 @@ public abstract class Player extends GameObject implements MoveableKeyCode {
 		myView.setX(startingPosition.getX());
 		myView.setY(startingPosition.getY());
 		
+
 	}
 	
 	public boolean removeALife() {
@@ -48,6 +49,7 @@ public abstract class Player extends GameObject implements MoveableKeyCode {
 
 	public boolean isAlive() {
 		return myLives > 0;
+
 	}
 	
 	
