@@ -2,7 +2,9 @@ package game_object;
 
 import java.io.FileNotFoundException;
 
-import javafx.geometry.Point2D;
+import g
+
+x.geometry.Point2D;
 
 // Spencer Buehlman
 public abstract class Projectile extends GameObject implements MovableTime{

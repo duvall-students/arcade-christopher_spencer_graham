@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Random;
 
+
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -54,11 +55,25 @@ public abstract class GameObject implements Collider {
 	@Override
 	public boolean collide(GameObject other) {
 		
-		
-		return this.isIntersecting(other);
-		
+		if(this.equals(other)) {
+			return false;
+		}
+		else {
+			return this.isIntersecting(other);
+		}
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GameObject other = (GameObject) obj;
+		return  this.getView() == other.getView();
+	}
 
 	@Override
 	public String toString() {

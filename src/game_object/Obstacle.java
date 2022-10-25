@@ -2,6 +2,7 @@ package game_object;
 
 import java.io.FileNotFoundException;
 
+import game_object.GameObject;
 import javafx.geometry.Point2D;
 
 public class Obstacle extends GameObject {

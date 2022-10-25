@@ -23,13 +23,12 @@ public class Spaceship extends Player {
 	
 	@Override
 	public boolean collide(GameObject other) {
-		boolean check = this.isIntersecting(other);
+		boolean check = super.collide(other);
 		if (check) {
 			//remove a life and if there are still lives remaining reset
 			if (this.removeALife()) {
 				resetPosition();
 			}
-			
 		}
 		return check;
 	}
