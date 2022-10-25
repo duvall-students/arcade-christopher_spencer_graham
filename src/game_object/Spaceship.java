@@ -6,6 +6,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
+
+//Graham Young
 public class Spaceship extends Player {
 
 	public static final int SPACESHIP_MOVE_SPEED = 50;
@@ -21,13 +23,12 @@ public class Spaceship extends Player {
 	
 	@Override
 	public boolean collide(GameObject other) {
-		boolean check = this.isIntersecting(other);
+		boolean check = super.collide(other);
 		if (check) {
 			//remove a life and if there are still lives remaining reset
 			if (this.removeALife()) {
 				resetPosition();
 			}
-			
 		}
 		return check;
 	}
