@@ -1,6 +1,6 @@
 package game_object;
 
-public interface Moveable<T> {
+public interface Movable<T> {
 
 	
 	public void move(T t);

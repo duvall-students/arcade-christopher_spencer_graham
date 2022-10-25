@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import javafx.geometry.Point2D;
 
-public class Alien extends Obstacle implements MoveableTime{
+public class Alien extends Obstacle implements MovableTime{
 
 	private Point2D myVelocity;
 	protected static final int ALIEN_MOVE_SPEED = 20;

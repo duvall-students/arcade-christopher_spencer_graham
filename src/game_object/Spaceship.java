@@ -6,6 +6,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
+
+//Graham Young
 public class Spaceship extends Player {
 
 	public static final int SPACESHIP_MOVE_SPEED = 50;

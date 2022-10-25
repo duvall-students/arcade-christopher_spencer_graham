@@ -7,10 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import game_object.GameObject;
-import game_object.Moveable;
+import game_object.Movable;
 import game_object.Collider;
-import game_object.MoveableKeyCode;
-import game_object.MoveableTime;
+import game_object.MovableKeyCode;
+import game_object.MovableTime;
 import game_object.Obstacle;
 import game_object.Player;
 import game_object.Projectile;
@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import levels.GameLevel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
+//Graham Young
 
 public abstract class GameScene extends Application {
 
@@ -65,7 +68,7 @@ public abstract class GameScene extends Application {
 	protected Collection<Text> texts;
 	protected Collection<GameObject> gameObjects;
 	protected Collection<Collider> colliders;
-	protected Collection<Moveable> moveables;
+	protected Collection<Movable> movables;
 	protected Player myPlayer;
 
 	protected int playerLives = 3;
@@ -96,10 +99,10 @@ public abstract class GameScene extends Application {
 	protected Scene setupGame (double width, double height, Paint background) {
 		gameObjects = new ArrayList<GameObject>();
 		colliders = new ArrayList<Collider>();
-		moveables = new ArrayList<Moveable>();
+		movables = new ArrayList<Movable>();
 
 		
-		Level level = setupLevel();
+		GameLevel level = setupLevel();
 		
 		
 		
@@ -127,7 +130,7 @@ public abstract class GameScene extends Application {
 			gameObjects.add(t);
 			colliders.add(t);
 			try {
-				moveables.add((Moveable)t);
+				movables.add((Movable)t);
 			}
 			catch (ClassCastException e) {
 				e.printStackTrace();

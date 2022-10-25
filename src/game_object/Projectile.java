@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import javafx.geometry.Point2D;
 
 // Spencer Buehlman
-public abstract class Projectile extends GameObject implements MoveableTime{
+public abstract class Projectile extends GameObject implements MovableTime{
 	
 	protected Point2D myVelocity;
 	protected int myMoveSpeed;

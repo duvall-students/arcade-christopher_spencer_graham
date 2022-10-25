@@ -5,7 +5,10 @@ import java.io.FileNotFoundException;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-public abstract class Player extends GameObject implements MoveableKeyCode {
+
+//Graham Young
+
+public abstract class Player extends GameObject implements MovableKeyCode {
 	
 	public static final int DEFAULT_LIVES = 3;
 	
