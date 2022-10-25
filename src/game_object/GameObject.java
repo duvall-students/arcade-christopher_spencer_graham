@@ -15,25 +15,19 @@ import javafx.scene.image.ImageView;
 //Written by Graham Young
 public abstract class GameObject implements Collider {
 	
-	
 	protected ImageView myView;
-	
-	
 	
 	public GameObject(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
         myView = new ImageView(image);
-        // make sure it stays a circle
         
         myView.setFitWidth(sizeWidth);
         myView.setFitHeight(sizeHeight);
-        // make sure it stays within the bounds
+
         myView.setX(pos.getX());
         myView.setY(pos.getY());
 
 	}
-	
-
 	
 	protected int getRandomInRange (int min, int max) {
 		Random dice = new Random();
@@ -47,14 +41,20 @@ public abstract class GameObject implements Collider {
 	
 	
 	public boolean isIntersecting(GameObject other) {
-		return myView.intersects(other.getView().getBoundsInParent());
+		return this.getBounds().intersects(other.getBounds());
+	}
+	
+	public Bounds getBounds() {
+		return myView.getBoundsInParent();
 	}
 	
 	@Override
-	public void collide(Collider collider) {
-		//To do
-	}
+	public boolean collide(GameObject other) {
 		
+		
+		return this.isIntersecting(other);
+		
+	}
 
 
 	@Override
