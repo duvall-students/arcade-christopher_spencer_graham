@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import game_object.GameObject;
+import game_object.Moveable;
 import game_object.Collider;
 import game_object.MoveableKeyCode;
 import game_object.MoveableTime;
@@ -64,8 +65,7 @@ public abstract class GameScene extends Application {
 	protected Collection<Text> texts;
 	protected Collection<GameObject> gameObjects;
 	protected Collection<Collider> colliders;
-	protected Collection<MoveableTime> moveableTimes;
-	protected Collection<MoveableKeyCode> moveableKeyCodes;
+	protected Collection<Moveable> moveables;
 	protected Player myPlayer;
 
 	protected int playerLives = 3;
@@ -96,16 +96,16 @@ public abstract class GameScene extends Application {
 	protected Scene setupGame (double width, double height, Paint background) {
 		gameObjects = new ArrayList<GameObject>();
 		colliders = new ArrayList<Collider>();
-		moveableTimes = new ArrayList<MoveableTime>();
-		moveableKeyCodes = new ArrayList<MoveableKeyCode>();
+		moveables = new ArrayList<Moveable>();
+
 		
 		Level level = setupLevel();
 		
 		
 		
-		addObjectstoCollectionsFromLevel(level.getPlayers());
-		addObjectstoCollectionsFromLevel(level.getObstacles());
-		addObjectstoCollectionsFromLevel(level.getProjectiles());
+		addObjectsToCollectionsFromLevel(level.getPlayers());
+		addObjectsToCollectionsFromLevel(level.getObstacles());
+		addObjectsToCollectionsFromLevel(level.getProjectiles());
 		
 
 		//setUpLevel();
@@ -120,24 +120,19 @@ public abstract class GameScene extends Application {
 	
 	
 	
-	private void addObjectstoCollectionsFromLevel(List<? extends GameObject> list) {
+	private void addObjectsToCollectionsFromLevel(List<? extends GameObject> list) {
 		
 		for(int i = 0; i <= list.size(); i++) {
 			GameObject t = list.get(i);
 			gameObjects.add(t);
 			colliders.add(t);
 			try {
-				moveableTimes.add((MoveableTime)t);
+				moveables.add((Moveable)t);
 			}
 			catch (ClassCastException e) {
 				e.printStackTrace();
 			}
-			try {
-				moveableKeyCodes.add((MoveableKeyCode)t);
-			}
-			catch (ClassCastException e) {
-				e.printStackTrace();
-			}
+			
 			root.getChildren().add(t.getView());
 		}
 	}

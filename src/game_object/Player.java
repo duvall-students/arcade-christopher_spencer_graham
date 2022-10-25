@@ -12,11 +12,12 @@ public abstract class Player extends GameObject implements MoveableKeyCode {
 	protected int myLives = DEFAULT_LIVES;
 	protected Point2D startingPosition;
 
-	public Player(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
 		startingPosition = pos;
 	}
 
+	
 	
 	@Override
 	public void move(KeyCode keyCode, int moveSpeed) {

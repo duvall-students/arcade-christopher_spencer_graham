@@ -11,12 +11,10 @@ import javafx.scene.input.KeyCode;
 
 public class Ball extends Projectile{
 
-
 	protected static final int BALL_MOVE_SPEED = 200;
-
-
-	public Ball(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
-		super(imagePath, sizeWidth, sizeHeight, pos);
+	
+	public Ball(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
+		super(imagePath, screenSize.getX()/10, screenSize.getY()/10, pos);
 		myMoveSpeed = BALL_MOVE_SPEED;
 		myVelocity = new Point2D(BALL_MOVE_SPEED, -BALL_MOVE_SPEED);
 
@@ -24,9 +22,8 @@ public class Ball extends Projectile{
 
 
 
-
 	@Override
-	public void move(double elapsedTime) {
+	public void move(Double elapsedTime) {
 
 		myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
 		myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
