@@ -16,8 +16,11 @@ import javafx.scene.image.ImageView;
 public abstract class GameObject implements Collider {
 	
 	protected ImageView myView;
+
 	
-	public GameObject(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+	
+	
+	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
         myView = new ImageView(image);
         
