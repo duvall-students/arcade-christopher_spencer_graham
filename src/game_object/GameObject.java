@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Random;
 
+
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -16,15 +17,17 @@ import javafx.scene.image.ImageView;
 public abstract class GameObject implements Collider {
 	
 	protected ImageView myView;
+
 	
-	public GameObject(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+	
+	
+	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
         myView = new ImageView(image);
-        // make sure it stays a circle
         
         myView.setFitWidth(sizeWidth);
         myView.setFitHeight(sizeHeight);
-        // make sure it stays within the bounds
+
         myView.setX(pos.getX());
         myView.setY(pos.getY());
 
@@ -42,15 +45,35 @@ public abstract class GameObject implements Collider {
 	
 	
 	public boolean isIntersecting(GameObject other) {
-		return myView.intersects(other.getView().getBoundsInParent());
+		return this.getBounds().intersects(other.getBounds());
+	}
+	
+	public Bounds getBounds() {
+		return myView.getBoundsInParent();
 	}
 	
 	@Override
-	public void collide(Collider collider) {
-		//To do
-	}
+	public boolean collide(GameObject other) {
 		
+		if(this.equals(other)) {
+			return false;
+		}
+		else {
+			return this.isIntersecting(other);
+		}
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GameObject other = (GameObject) obj;
+		return  this.getView() == other.getView();
+	}
 
 	@Override
 	public String toString() {

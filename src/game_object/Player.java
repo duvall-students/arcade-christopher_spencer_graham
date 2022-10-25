@@ -5,13 +5,29 @@ import java.io.FileNotFoundException;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-public class Player extends GameObject implements MoveableKeyCode {
 
-	public Player(String imagePath, int sizeWidth, int sizeHeight, Point2D pos) throws FileNotFoundException {
+//Graham Young
+
+public abstract class Player extends GameObject implements MovableKeyCode {
+	
+	public static final int DEFAULT_LIVES = 3;
+	
+	protected int myLives = DEFAULT_LIVES;
+	protected Point2D startingPosition;
+
+	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
-		// TODO Auto-generated constructor stub
+		startingPosition = pos;
+	}
+	
+	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos, int lives) throws FileNotFoundException {
+		super(imagePath, sizeWidth, sizeHeight, pos);
+		startingPosition = pos;
+		myLives = lives;
 	}
 
+
+	
 	
 	@Override
 	public void move(KeyCode keyCode, int moveSpeed) {
@@ -22,6 +38,30 @@ public class Player extends GameObject implements MoveableKeyCode {
 	        else if (keyCode == KeyCode.RIGHT ) {
 	        	myView.setX(myView.getX() + moveSpeed);
 	        }
-		
+
 	}
+	
+	public void resetPosition() {
+		myView.setX(startingPosition.getX());
+		myView.setY(startingPosition.getY());
+		
+
+	}
+	
+	public boolean removeALife() {
+		myLives--;
+		return isAlive();
+	}
+	
+	public int getLives() {
+		return myLives;
+	}
+
+	public boolean isAlive() {
+		return myLives > 0;
+
+	}
+	
+	
+
 }
