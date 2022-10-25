@@ -16,5 +16,6 @@ public class Alien extends Obstacle implements MoveableTime{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

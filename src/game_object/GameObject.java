@@ -20,6 +20,7 @@ public abstract class GameObject implements Collider {
 	
 	
 	
+	
 	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
         myView = new ImageView(image);

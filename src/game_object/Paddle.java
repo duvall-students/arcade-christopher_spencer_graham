@@ -12,6 +12,7 @@ public class Paddle extends Player {
 	
 	public static final int PADDLE_MOVE_SPEED = 50;
 
+	
 	public Paddle(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
 		super(imagePath, screenSize.getX()/10, screenSize.getY()/10, pos);
 		

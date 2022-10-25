@@ -18,6 +18,7 @@ public class Brick extends Obstacle{
 	
 
 	
+	
 	public Brick(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
 		super(imagePath, screenSize.getX()/10, screenSize.getY()/10, pos);
 		myScoreValue = getRandomInRange(MIN_SCORE_VALUE, MAX_SCORE_VALUE);

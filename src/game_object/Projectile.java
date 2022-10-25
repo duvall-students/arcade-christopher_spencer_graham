@@ -19,5 +19,6 @@ public class Projectile extends GameObject implements MoveableTime{
         myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
         myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 		
+        
 	}
 }

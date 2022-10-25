@@ -13,6 +13,7 @@ public class Spaceship extends Player {
 	public static final int HEIGHT = 10;
 	
 	
+	
 	public Spaceship(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
 		super(imagePath, screenSize.getX()/WIDTH, screenSize.getY()/HEIGHT, pos);
 		// TODO Auto-generated constructor stub

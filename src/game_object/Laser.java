@@ -11,4 +11,5 @@ public class Laser extends Projectile {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 }
