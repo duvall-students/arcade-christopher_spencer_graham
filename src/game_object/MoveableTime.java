@@ -7,6 +7,6 @@ public interface MoveableTime extends Moveable<Double>{
 	
 	
 	//move the implementation based on time
-	public void move(double elapsedTime);
+	public void move(Double elapsedTime);
 
 }
