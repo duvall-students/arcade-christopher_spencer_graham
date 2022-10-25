@@ -1,6 +1,9 @@
 package levels;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -21,7 +24,14 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+//Graham Young
 public abstract class GameLevel{
+	
+	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
+
+
+	protected static final Paint BACKGROUND = Color.BLACK;
 	protected static final int REGULAR_FONT_SIZE = 20;
 	protected static final int GAME_TITLE_FONT_SIZE = 75;
 	protected static final int END_GAME_TITLE_FONT_SIZE = 20;
@@ -91,15 +101,16 @@ public abstract class GameLevel{
 
 	public abstract void createProjectiles(Point2D screenSize, List<Point2D> positions);
 	
-	public abstract void createPlayers(Point2D screenSize, List<Point2D> positions);
+	public abstract void createPlayer(Point2D screenSize, Point2D position);
 	
 	
 	
 	protected abstract void handleKeyInput(KeyCode code);
 	
+	//default step method
 	public void step(double elapsedTime) {
 
-		//move the ball
+		//move the objects
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
 		}

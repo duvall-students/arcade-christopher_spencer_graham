@@ -44,11 +44,7 @@ import java.util.Random;
 
 public abstract class GameScene extends Application {
 
-	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 
-	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
-
-	protected static final Paint BACKGROUND = Color.BLACK;
 	protected Timeline animation = new Timeline();
 	protected static final int FRAMES_PER_SECOND = 60;
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -65,7 +61,6 @@ public abstract class GameScene extends Application {
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
 	
-	protected int playerLives = 3;
 	
 	@Override
 	public void start (Stage stage) {
@@ -86,8 +81,6 @@ public abstract class GameScene extends Application {
 	
 
 
-
-	protected abstract void handleKeyInput(KeyCode keyCode);
 
 	
 
