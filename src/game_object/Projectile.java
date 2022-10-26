@@ -1,9 +1,6 @@
 package game_object;
 
 import java.io.FileNotFoundException;
-
-
-
 import javafx.geometry.Point2D;
 
 // Spencer Buehlman
