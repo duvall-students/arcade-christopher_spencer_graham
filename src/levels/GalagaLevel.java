@@ -1,7 +1,13 @@
 package levels;
 
+import game_object.GameObject;
+import game_object.Laser;
+import game_object.Projectile;
+
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import game_object.Alien;
 import game_object.Brick;
@@ -14,8 +20,14 @@ public abstract class GalagaLevel extends GameLevel {
 	protected static final String DEFAULT_ALIEN_IMAGE = "resouces/galaga-enemy1.gif";
 	protected static final String SPACESHIP_IMAGE = "resources/galaga-ship.png";
 
+	
+	
+	
+	
+	
+	
 	public GalagaLevel() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -23,6 +35,9 @@ public abstract class GalagaLevel extends GameLevel {
 		for(Point2D pos : positions) {
 			try {
 				Alien newAlien = new Alien(DEFAULT_ALIEN_IMAGE, screenSize, pos);
+				gameObjects.add(newAlien);
+				movableTimes.add(newAlien);
+				colliders.add(newAlien);
 			}
 			catch(FileNotFoundException e) {
 				e.printStackTrace();
@@ -51,8 +66,16 @@ public abstract class GalagaLevel extends GameLevel {
 
 	@Override
 	protected void handleKeyInput(KeyCode code) {
-		// TODO Auto-generated method stub
-
+		
+		Laser laser = ((Spaceship) myPlayer).shoot(code, screenSize);
+		if(laser != null) {
+			root.getChildren().add(laser.getView());
+			myScene.setRoot(root);
+		}
+		
+		myPlayer.move(code);
+		
+		
 	}
 
 }

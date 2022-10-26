@@ -8,6 +8,8 @@ import javafx.scene.input.KeyCode;
 
 public class Laser extends Projectile {
 	
+	protected static final String DEFAULT_LASER_IMAGE = "resources/galaga-laser.gif";
+	
 	protected static final int LASER_MOVE_SPEED = 200;
 
 
@@ -17,6 +19,11 @@ public class Laser extends Projectile {
 		myVelocity = new Point2D(0, -LASER_MOVE_SPEED);
 	}
 
+	public Laser(Point2D screenSize, Point2D pos) throws FileNotFoundException {
+		this(DEFAULT_LASER_IMAGE, screenSize, pos);
+		
+	}
+	
 
 	@Override
 	public void move(Double elapsedTime) {

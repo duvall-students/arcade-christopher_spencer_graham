@@ -48,6 +48,8 @@ public abstract class GameLevel{
 	protected Collection<Obstacle> obstacles;
 	protected Collection<Projectile> projectiles;
 	
+	protected Group root = new Group();
+	
 	protected Player myPlayer;
 	protected Scene myScene;
 	
@@ -64,7 +66,6 @@ public abstract class GameLevel{
 	}
 	
 	protected Scene setupLevelScene (double width, double height, Paint background) {
-		Group root = new Group();
 		
 
 
