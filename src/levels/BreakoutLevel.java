@@ -17,13 +17,13 @@ public abstract class BreakoutLevel extends GameLevel {
 	private static final String BREAKOUT_TITLE = "BREAKOUT";
 	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
 	
-	private HighScore highScore;
+	//private HighScore highScore;
 
 	public BreakoutLevel() {
 		super();
 		highScore = new HighScore();
 		createProjectilePositions();
-		createTextDisplay((17.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: " + highScore.getCurrentHighScore(BREAKOUT_HIGH_SCORE_FILE_NAME), TEXT_COLOR, root);
+		createTextDisplay((17.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: " + HighScore.getCurrentHighScore(BREAKOUT_HIGH_SCORE_FILE_NAME), TEXT_COLOR, root);
 		createTextDisplay((4*screenSize.getX())/10, screenSize.getY()/10, TEXT_FONT, GAME_TITLE_FONT_SIZE, BREAKOUT_TITLE, TEXT_COLOR, root);
 	}
 
