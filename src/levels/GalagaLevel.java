@@ -17,8 +17,8 @@ import javafx.scene.input.KeyCode;
 
 public abstract class GalagaLevel extends GameLevel {
 	
-	protected static final String DEFAULT_ALIEN_IMAGE = "resouces/galaga-enemy1.gif";
-	protected static final String SPACESHIP_IMAGE = "resources/galaga-ship.png";
+	protected static final String DEFAULT_ALIEN_IMAGE = "resources/galaga-enemy1.gif";
+	protected static final String SPACESHIP_IMAGE = "resources/galaga-ship.gif";
 
 	
 	
@@ -57,6 +57,7 @@ public abstract class GalagaLevel extends GameLevel {
 		try {
 			Spaceship newSpaceship = new Spaceship(SPACESHIP_IMAGE, screenSize, position);
 			myPlayer = newSpaceship;
+			
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -71,6 +72,7 @@ public abstract class GalagaLevel extends GameLevel {
 		if(laser != null) {
 			root.getChildren().add(laser.getView());
 			myScene.setRoot(root);
+			movableTimes.add(laser);
 		}
 		
 		myPlayer.move(code);

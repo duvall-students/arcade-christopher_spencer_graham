@@ -14,7 +14,7 @@ public class Laser extends Projectile {
 
 
 	public Laser(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
-		super(imagePath, screenSize.getX()/10, screenSize.getY()/10, pos);
+		super(imagePath, screenSize.getX()/50, screenSize.getY()/50, pos);
 		myMoveSpeed = LASER_MOVE_SPEED;
 		myVelocity = new Point2D(0, -LASER_MOVE_SPEED);
 	}

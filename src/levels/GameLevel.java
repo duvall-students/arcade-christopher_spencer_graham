@@ -31,7 +31,7 @@ public abstract class GameLevel{
 	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
 
 
-	protected static final Paint BACKGROUND = Color.BLACK;
+	protected static final Paint BACKGROUND = Color.AZURE;
 	protected static final int REGULAR_FONT_SIZE = 20;
 	protected static final int GAME_TITLE_FONT_SIZE = 75;
 	protected static final int END_GAME_TITLE_FONT_SIZE = 20;
@@ -67,7 +67,7 @@ public abstract class GameLevel{
 	
 	protected Scene setupLevelScene (double width, double height, Paint background) {
 		
-
+		root.getChildren().add(myPlayer.getView());
 
 		for(GameObject g : gameObjects) {
 			root.getChildren().add(g.getView());

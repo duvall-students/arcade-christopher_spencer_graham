@@ -2,7 +2,7 @@ package game_object;
 
 import java.io.FileNotFoundException;
 
-import g
+
 
 import javafx.geometry.Point2D;
 

@@ -15,6 +15,7 @@ public class GalagaLevelOne extends GalagaLevel {
 	protected final Point2D PLAYER_START_POS = new Point2D(screenSize.getX()/2, screenSize.getY()*.75);
 
 	public GalagaLevelOne() {
+		super();
 		createPlayer(screenSize, PLAYER_START_POS);
 		
 		List<Point2D> alienPositions = new ArrayList<>();
@@ -25,7 +26,7 @@ public class GalagaLevelOne extends GalagaLevel {
 			alienPositions.add(newPoint);
 		}
 		createObstacles(screenSize, alienPositions);
-		
+		myScene = setupLevelScene(screenSize.getX(), screenSize.getY(), BACKGROUND);
 	}
 
 }
