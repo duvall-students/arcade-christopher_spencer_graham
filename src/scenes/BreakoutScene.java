@@ -1,7 +1,9 @@
 package scenes;
 
 import java.util.HashMap;
-import levels.BreakoutLevel;
+import levels.BreakoutLevelOne;
+import levels.BreakoutLevelTwo;
+import levels.BreakoutLevelThree;
 import levels.GameLevel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,13 +20,16 @@ import levels.GameLevel;
 
 public class BreakoutScene extends GameScene {
 	// some things we need to remember during our game
-	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
-	protected BreakoutLevelOne myCurrentBreakoutLevel;
+	protected BreakoutLevelOne breakoutLeveOne;
+	protected BreakoutLevelTwo breakoutLeveTwo;
+	protected BreakoutLevelThree breakoutLeveThree;
 	
 	@Override
 	public void start(Stage stage) {
-		myCurrentBreakoutLevel = new BreakoutLevelOne();
-		stage.setScene(myCurrentBreakoutLevel.setupLevelScene(BACKGROUND));
+		breakoutLeveOne = new BreakoutLevelOne();
+		breakoutLeveTwo = new BreakoutLevelTwo();
+		breakoutLeveThree = new BreakoutLevelThree();
+		stage.setScene(breakoutLeveThree.setupLevelScene(BACKGROUND));
 		stage.show();
 		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
