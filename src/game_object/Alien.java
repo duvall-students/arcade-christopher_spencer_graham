@@ -11,7 +11,7 @@ public class Alien extends Obstacle implements MovableTime{
 	protected static final int ALIEN_MOVE_SPEED = 20;
 
 	public Alien(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
-		super(imagePath, screenSize.getX()/10, screenSize.getY()/10, pos);
+		super(imagePath, screenSize.getX()/50, screenSize.getY()/50, pos);
 		// TODO Auto-generated constructor stub
 		myVelocity = new Point2D(0, ALIEN_MOVE_SPEED);
 

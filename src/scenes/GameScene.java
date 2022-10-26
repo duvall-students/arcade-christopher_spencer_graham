@@ -31,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import levels.BreakoutLevel;
+import levels.GalagaLevelOne;
 import levels.GameLevel;
 
 import java.io.FileInputStream;
@@ -42,10 +43,9 @@ import java.util.Random;
 
 //Graham Young
 
-public abstract class GameScene extends Application {
+public class GameScene extends Application {
 
-	protected static final Paint BACKGROUND = Color.BLACK;
-	protected Timeline animation = new Timeline();
+
 	protected static final int FRAMES_PER_SECOND = 60;
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -58,25 +58,30 @@ public abstract class GameScene extends Application {
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
 	
-	protected int playerLives = 3;
 	
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
+		
+		myCurrentLevel = new GalagaLevelOne();
+
 		//myCurrentLevel.setupLevelScene(screenSize.getX(), screenSize.getY(), BACKGROUND);
+
 		stage.setScene(myCurrentLevel.getScene());
 		stage.show();
 
 
 		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
+		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-	}	
+	}
+	
 
-//	public static void main(String[] args) {
-//		launch(args);
-//	}
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 }
