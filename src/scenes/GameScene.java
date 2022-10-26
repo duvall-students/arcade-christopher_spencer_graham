@@ -50,14 +50,11 @@ public abstract class GameScene extends Application {
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
-
-
 	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
 	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
 	
 	protected static final String LEVEL = "level";
 
-	
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
 	

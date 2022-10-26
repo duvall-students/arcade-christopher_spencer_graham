@@ -26,9 +26,6 @@ public abstract class Player extends GameObject implements MovableKeyCode {
 		myLives = lives;
 	}
 
-
-	
-	
 	@Override
 	public void move(KeyCode keyCode, int moveSpeed) {
 			
