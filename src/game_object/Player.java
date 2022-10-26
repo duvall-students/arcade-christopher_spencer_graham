@@ -20,11 +20,11 @@ public abstract class Player extends GameObject implements MovableKeyCode {
 		startingPosition = pos;
 	}
 	
-//	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos, int lives) throws FileNotFoundException {
-//		super(imagePath, sizeWidth, sizeHeight, pos);
-//		startingPosition = pos;
-//		myLives = lives;
-//	}
+	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos, int lives) throws FileNotFoundException {
+		super(imagePath, sizeWidth, sizeHeight, pos);
+		startingPosition = pos;
+		myLives = lives;
+	}
 
 
 	
