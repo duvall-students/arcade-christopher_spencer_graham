@@ -44,24 +44,17 @@ import java.util.Random;
 
 public abstract class GameScene extends Application {
 
-	protected GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-
-	protected Point2D screenSize = new Point2D(gd[0].getDisplayMode().getWidth(), gd[0].getDisplayMode().getHeight());
-
 	protected static final Paint BACKGROUND = Color.BLACK;
 	protected Timeline animation = new Timeline();
 	protected static final int FRAMES_PER_SECOND = 60;
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
-
-
 	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
 	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
 	
 	protected static final String LEVEL = "level";
 
-	
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
 	
@@ -70,9 +63,7 @@ public abstract class GameScene extends Application {
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
-		
-		
-
+		//myCurrentLevel.setupLevelScene(screenSize.getX(), screenSize.getY(), BACKGROUND);
 		stage.setScene(myCurrentLevel.getScene());
 		stage.show();
 
@@ -82,14 +73,7 @@ public abstract class GameScene extends Application {
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
-	}
-	
-
-
-
-	protected abstract void handleKeyInput(KeyCode keyCode);
-
-	
+	}	
 
 //	public static void main(String[] args) {
 //		launch(args);
