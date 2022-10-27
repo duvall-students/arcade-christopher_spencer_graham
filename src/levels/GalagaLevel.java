@@ -57,7 +57,7 @@ public abstract class GalagaLevel extends GameLevel {
 		try {
 			Spaceship newSpaceship = new Spaceship(SPACESHIP_IMAGE, screenSize, position);
 			myPlayer = newSpaceship;
-			//gameObjects.add(newSpaceship);
+			gameObjects.add(newSpaceship);
 			//movableKeyCodes.add(newSpaceship);
 			//colliders.add(newSpaceship);
 			
