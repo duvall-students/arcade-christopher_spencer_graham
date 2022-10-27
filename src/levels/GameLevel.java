@@ -67,7 +67,7 @@ public abstract class GameLevel{
 	
 	protected Scene setupLevelScene (double width, double height, Paint background) {
 		
-		root.getChildren().add(myPlayer.getView());
+	
 
 		for(GameObject g : gameObjects) {
 			root.getChildren().add(g.getView());
