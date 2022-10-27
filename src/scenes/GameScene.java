@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import levels.BreakoutLevel;
 import levels.GalagaLevelOne;
+import levels.BreakoutLevelOne;
 import levels.GameLevel;
 
 import java.io.FileInputStream;
@@ -63,9 +64,11 @@ public class GameScene extends Application {
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
 		
-		myCurrentLevel = new GalagaLevelOne();
+		//myCurrentLevel = new GalagaLevelOne();
+		
+		myCurrentLevel = new BreakoutLevelOne();
 
-		//myCurrentLevel.setupLevelScene(screenSize.getX(), screenSize.getY(), BACKGROUND);
+		//myCurrentLevel.setupLevelScene();
 
 		stage.setScene(myCurrentLevel.getScene());
 		stage.show();
