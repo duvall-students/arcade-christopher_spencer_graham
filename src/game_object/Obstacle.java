@@ -18,4 +18,5 @@ public class Obstacle extends GameObject {
 	public int getScoreValue() {
 		return myScoreValue;
 	}
+	
 }

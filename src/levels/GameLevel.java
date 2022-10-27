@@ -37,6 +37,7 @@ public abstract class GameLevel{
 	protected static final int END_GAME_TITLE_FONT_SIZE = 1000;
 	protected static final String TEXT_FONT = "Arial";
 	protected static final Color TEXT_COLOR = Color.WHITE;
+	protected static final Color BACKGROUND_COLOR = Color.AZURE;
 	protected static final int PLAYER_STARTING_SCORE = 0;
 	
 	protected Collection<Text> texts;
@@ -61,15 +62,13 @@ public abstract class GameLevel{
 		movableKeyCodes = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		projectiles = new ArrayList<>();
-		obstaclePositions = new ArrayList<Point2D>();
-		ballStartingPositions = new ArrayList<Point2D>();
-		playerStartingPosition = new Point2D(screenSize.getX()/2,(19*screenSize.getY())/20);
+		//ballStartingPositions = new ArrayList<Point2D>();
+		//playerStartingPosition = new Point2D(screenSize.getX()/2,(19*screenSize.getY())/20);
 	}
 	
-  	protected Scene setupLevelScene (double width, double height, Paint background) {
+  	public Scene setupLevelScene() {
 		
-
-		root.getChildren().add(myPlayer.getView());
+		//root.getChildren().add(myPlayer.getView());
 		root = new Group();
 		createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
 		createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
@@ -87,7 +86,7 @@ public abstract class GameLevel{
 		//createPlayer();
 		//createProjectiles();
 		//root.getChildren().add(myPlayer.getView()); 
-		Scene scene = new Scene(root, screenSize.getX(), screenSize.getY(), background);
+		Scene scene = new Scene(root, screenSize.getX(), screenSize.getY(), BACKGROUND_COLOR);
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		return scene;
 	}
@@ -106,7 +105,8 @@ public abstract class GameLevel{
 	
 	//default step method
 	public void step(double elapsedTime) {
-
+		ArrayList<GameObject> remove = new ArrayList<GameObject>();
+		
 		//move the objects
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
@@ -114,9 +114,15 @@ public abstract class GameLevel{
 			
 		for(Collider c : colliders) {
 			for(GameObject x : gameObjects) {
-				c.collide(x);
+				if (c.collide(x) && obstacles.contains(x)) {
+					remove.add(x);
+					root.getChildren().remove(x.getView());
+				}
 			}
-		}	
+		}
+		
+		gameObjects.remove(remove.get(0));
+		obstacles.remove(remove.get(0));
 	}
 		
 	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {

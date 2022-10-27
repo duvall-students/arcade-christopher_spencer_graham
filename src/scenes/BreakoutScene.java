@@ -24,19 +24,20 @@ public class BreakoutScene extends GameScene {
 	protected BreakoutLevelTwo breakoutLeveTwo;
 	protected BreakoutLevelThree breakoutLeveThree;
 	
-	@Override
-	public void start(Stage stage) {
-		breakoutLeveOne = new BreakoutLevelOne();
-		breakoutLeveTwo = new BreakoutLevelTwo();
-		breakoutLeveThree = new BreakoutLevelThree();
-		stage.setScene(breakoutLeveThree.setupLevelScene(BACKGROUND));
-		stage.show();
-		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-	}
+//	@Override
+//	public void start(Stage stage) {
+		//breakoutLeveOne = new BreakoutLevelOne();
+		//breakoutLeveTwo = new BreakoutLevelTwo();
+		//breakoutLeveThree = new BreakoutLevelThree();
+//		stage.setScene(breakoutLeveOne.setupLevelScene());
+//		stage.show();
+//		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
+//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
+//		Timeline animation = new Timeline();
+//		animation.setCycleCount(Timeline.INDEFINITE);
+//		animation.getKeyFrames().add(frame);
+//		animation.play();
+//	}
 	
 //	protected void setupLevel(int width, int height) {
 //		
