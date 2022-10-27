@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class BreakoutLevelOne extends BreakoutLevel {
 	
-	protected final Point2D PLAYER_START_POS = new Point2D(screenSize.getX()/2, screenSize.getY()*.75);
+	protected final Point2D PLAYER_START_POS = new Point2D(screenSize.getX()/2, screenSize.getY()*.9);
 
 	public BreakoutLevelOne() {
 		super();
@@ -14,12 +14,6 @@ public class BreakoutLevelOne extends BreakoutLevel {
 		createObstacles(screenSize, createObstaclePositions());
 		createProjectiles(screenSize, createProjectilePositions());
 		myScene = setupLevelScene();
-	}
-
-	@Override
-	protected void handleKeyInput(KeyCode code) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	private ArrayList<Point2D> createObstaclePositions() {
