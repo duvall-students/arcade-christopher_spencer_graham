@@ -10,7 +10,7 @@ import javafx.scene.input.KeyCode;
 //Graham Young
 public class Spaceship extends Player {
 
-	public static final int SPACESHIP_MOVE_SPEED = 50;
+	public static final int SPACESHIP_MOVE_SPEED = 10;
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
 	

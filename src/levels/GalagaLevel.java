@@ -38,6 +38,7 @@ public abstract class GalagaLevel extends GameLevel {
 				gameObjects.add(newAlien);
 				movableTimes.add(newAlien);
 				colliders.add(newAlien);
+				obstacles.add(newAlien);
 			}
 			catch(FileNotFoundException e) {
 				e.printStackTrace();
@@ -77,6 +78,7 @@ public abstract class GalagaLevel extends GameLevel {
 			myScene.setRoot(root);
 			movableTimes.add(laser);
 			colliders.add(laser);
+			projectiles.add(laser);
 		}
 		
 		myPlayer.move(code);

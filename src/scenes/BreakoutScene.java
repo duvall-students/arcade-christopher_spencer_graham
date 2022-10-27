@@ -1,7 +1,10 @@
 package scenes;
 
 import java.util.HashMap;
-
+import levels.BreakoutLevelOne;
+import levels.BreakoutLevelTwo;
+import levels.BreakoutLevelThree;
+import levels.GameLevel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
@@ -9,31 +12,32 @@ import javafx.scene.input.KeyCode;
 
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import levels.BreakoutLevelOne;
 import levels.BreakoutLevel;
+import levels.GameLevel;
 
 // Name: Christopher Boyette
 
 public class BreakoutScene extends GameScene {
 	// some things we need to remember during our game
-	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+	protected BreakoutLevelOne breakoutLeveOne;
+	protected BreakoutLevelTwo breakoutLeveTwo;
+	protected BreakoutLevelThree breakoutLeveThree;
 	
-	
-	
-	
-	@Override
-	public void start(Stage stage) {
-		
-	}
-	
-	@Override
-	protected void handleKeyInput(KeyCode keyCode) {
-		// TODO Auto-generated method stub
-		
-
-	}
-	
-
-	
+//	@Override
+//	public void start(Stage stage) {
+		//breakoutLeveOne = new BreakoutLevelOne();
+		//breakoutLeveTwo = new BreakoutLevelTwo();
+		//breakoutLeveThree = new BreakoutLevelThree();
+//		stage.setScene(breakoutLeveOne.setupLevelScene());
+//		stage.show();
+//		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
+//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
+//		Timeline animation = new Timeline();
+//		animation.setCycleCount(Timeline.INDEFINITE);
+//		animation.getKeyFrames().add(frame);
+//		animation.play();
+//	}
 	
 //	protected void setupLevel(int width, int height) {
 //		

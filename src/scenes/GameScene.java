@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import levels.BreakoutLevel;
 import levels.GalagaLevelOne;
+import levels.BreakoutLevelOne;
 import levels.GameLevel;
 
 import java.io.FileInputStream;
@@ -50,14 +51,11 @@ public class GameScene extends Application {
 	protected static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	protected static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
-
-
 	protected static final KeyCode PLAYER_MOVE_LEFT = KeyCode.LEFT;
 	protected static final KeyCode PLAYER_MOVE_RIGHT = KeyCode.RIGHT;
 	
 	protected static final String LEVEL = "level";
 
-	
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
 	
@@ -67,6 +65,10 @@ public class GameScene extends Application {
 		// attach scene to the stage and display it
 		
 		myCurrentLevel = new GalagaLevelOne();
+		
+		//myCurrentLevel = new BreakoutLevelOne();
+
+		//myCurrentLevel.setupLevelScene();
 
 		stage.setScene(myCurrentLevel.getScene());
 		stage.show();
@@ -79,10 +81,6 @@ public class GameScene extends Application {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-	
-
-
-
 	
 
 	public static void main(String[] args) {
