@@ -9,6 +9,7 @@ import java.util.List;
 
 import game_object.Collider;
 import game_object.GameObject;
+import game_object.Laser;
 import game_object.Movable;
 import game_object.MovableKeyCode;
 import game_object.MovableTime;
@@ -123,9 +124,11 @@ public abstract class GameLevel{
 				if (p.collide(o)) {
 					//myScore += myBricks.get(i).getScoreValue();
 					removeFromAllLists(o);
-					removeFromAllLists(p);
+					if(p instanceof Laser){
+						root.getChildren().remove(p.getView());
+						removeFromAllLists(p);	
+					}
 					root.getChildren().remove(o.getView());
-					root.getChildren().remove(p.getView());
 				}
 				if(p.collide(myPlayer)) {
 					
