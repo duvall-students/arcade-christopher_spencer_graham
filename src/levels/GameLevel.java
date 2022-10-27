@@ -50,7 +50,8 @@ public abstract class GameLevel{
 	
 	protected Player myPlayer;
 	protected Scene myScene;
-	
+	protected Text livesText;
+	protected Text scoreText;
 	
 	
 	Group root;
@@ -73,9 +74,10 @@ public abstract class GameLevel{
 
 		//root.getChildren().add(myPlayer.getView());
 		root = new Group();
-		createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
-		createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
-		
+		scoreText = createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
+		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
+		texts.add(livesText);
+		texts.add(scoreText);
 
 		for(GameObject g : gameObjects) {
 			root.getChildren().add(g.getView());
@@ -133,15 +135,22 @@ public abstract class GameLevel{
 			if(myPlayer.collide(o)) {
 				removeFromAllLists(o);
 				root.getChildren().remove(o.getView());
+				updateLivesText();
+				
+				if(!myPlayer.isAlive()) {
+					//endGame
+					
+				}
 			}
 		}
 		
 		myScene.setRoot(root);
 	}
 	
-	protected Text updateLivesText() {
-		createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
-		
+	protected void updateLivesText() {		
+		root.getChildren().remove(livesText);
+		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
+		root.getChildren().add(livesText);
 	}
 	
 	protected void removeFromAllLists(GameObject obj) {
@@ -180,14 +189,14 @@ public abstract class GameLevel{
 	}
 	
     
-	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
+	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));
 		newDisplay.setX(xPosition);
 		newDisplay.setY(yPosition);
 		newDisplay.setText(textToDisplay);
 		newDisplay.setStroke(colorOfText);
-		texts.add(newDisplay);
+		return newDisplay;
 	}
 	
 	
