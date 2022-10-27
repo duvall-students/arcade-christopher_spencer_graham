@@ -9,6 +9,7 @@ import java.util.List;
 
 import game_object.Collider;
 import game_object.GameObject;
+import game_object.Laser;
 import game_object.Movable;
 import game_object.MovableKeyCode;
 import game_object.MovableTime;
@@ -50,6 +51,10 @@ public abstract class GameLevel{
 	
 	protected Player myPlayer;
 	protected Scene myScene;
+	protected Text livesText;
+	protected Text scoreText;
+	
+	
 	Group root;
 	
 	public GameLevel() {
@@ -67,12 +72,14 @@ public abstract class GameLevel{
 	}
 	
   	public Scene setupLevelScene() {
-		
+
 		//root.getChildren().add(myPlayer.getView());
 		root = new Group();
-		createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
-		createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
-		
+		scoreText = createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
+		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
+		texts.add(livesText);
+		texts.add(scoreText);
+
 		for(GameObject g : gameObjects) {
 			root.getChildren().add(g.getView());
 		}
@@ -111,28 +118,88 @@ public abstract class GameLevel{
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
 		}
-			
-		for(Collider c : colliders) {
-			for(GameObject x : gameObjects) {
-				if (c.collide(x) && obstacles.contains(x)) {
-					remove.add(x);
-					root.getChildren().remove(x.getView());
+		for(Obstacle o : obstacles) {
+			//check if the obstacles collide with projectiles
+			for(Projectile p : projectiles) {
+				if (p.collide(o)) {
+					//myScore += myBricks.get(i).getScoreValue();
+					removeFromAllLists(o);
+					if(p instanceof Laser){
+						root.getChildren().remove(p.getView());
+						removeFromAllLists(p);	
+					}
+					root.getChildren().remove(o.getView());
+				}
+				if(p.collide(myPlayer)) {
+					
+				}
+			}
+			//check if obstacles collide with player
+			if(myPlayer.collide(o)) {
+				removeFromAllLists(o);
+				root.getChildren().remove(o.getView());
+				updateLivesText();
+				
+				if(!myPlayer.isAlive()) {
+					//endGame
+					
 				}
 			}
 		}
 		
-		gameObjects.remove(remove.get(0));
-		obstacles.remove(remove.get(0));
+		myScene.setRoot(root);
 	}
+	
+	protected void updateLivesText() {		
+		root.getChildren().remove(livesText);
+		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
+		root.getChildren().add(livesText);
+	}
+	
+	protected void removeFromAllLists(GameObject obj) {
+		gameObjects.remove(obj);
+		try {
+			obstacles.remove((Obstacle)obj);
+		}
+		catch(ClassCastException e) {
+			
+		}
+		try {
+			colliders.remove((Collider)obj);
+		}
+		catch(ClassCastException e) {
+			
+		}
+		try {
+			movableTimes.remove((MovableTime)obj);
+		}
+		catch(ClassCastException e) {
+			
+		}
+		try {
+			movableKeyCodes.remove((MovableKeyCode)obj);
+		}
+		catch(ClassCastException e) {
+			
+		}
+		try {
+			projectiles.remove((Projectile)obj);
+		}
+		catch(ClassCastException e) {
+			
+		}
 		
-	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
+	}
+	
+    
+	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));
 		newDisplay.setX(xPosition);
 		newDisplay.setY(yPosition);
 		newDisplay.setText(textToDisplay);
 		newDisplay.setStroke(colorOfText);
-		texts.add(newDisplay);
+		return newDisplay;
 	}
 	
 	

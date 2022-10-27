@@ -45,9 +45,9 @@ public abstract class Player extends GameObject implements MovableKeyCode {
 
 	}
 	
-	public boolean removeALife() {
+	public void removeALife() {
 		myLives--;
-		return isAlive();
+		
 	}
 	
 	public int getLives() {

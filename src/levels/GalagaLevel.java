@@ -37,7 +37,8 @@ public abstract class GalagaLevel extends GameLevel {
 				Alien newAlien = new Alien(DEFAULT_ALIEN_IMAGE, screenSize, pos);
 				gameObjects.add(newAlien);
 				movableTimes.add(newAlien);
-				//colliders.add(newAlien);
+				colliders.add(newAlien);
+				obstacles.add(newAlien);
 			}
 			catch(FileNotFoundException e) {
 				e.printStackTrace();
@@ -59,7 +60,7 @@ public abstract class GalagaLevel extends GameLevel {
 			myPlayer = newSpaceship;
 			gameObjects.add(newSpaceship);
 			//movableKeyCodes.add(newSpaceship);
-			//colliders.add(newSpaceship);
+			colliders.add(newSpaceship);
 			
 		}
 		catch(FileNotFoundException e) {
@@ -76,7 +77,8 @@ public abstract class GalagaLevel extends GameLevel {
 			root.getChildren().add(laser.getView());
 			myScene.setRoot(root);
 			movableTimes.add(laser);
-			//colliders.add(laser);
+			colliders.add(laser);
+			projectiles.add(laser);
 		}
 		
 		myPlayer.move(code);

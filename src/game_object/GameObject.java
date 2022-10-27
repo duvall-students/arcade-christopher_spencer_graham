@@ -55,12 +55,9 @@ public abstract class GameObject implements Collider {
 	@Override
 	public boolean collide(GameObject other) {
 		
-		if(this.equals(other)) {
-			return false;
-		}
-		else {
+		
 			return this.isIntersecting(other);
-		}
+		
 	}
 
 	@Override
