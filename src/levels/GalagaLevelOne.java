@@ -28,7 +28,7 @@ public class GalagaLevelOne extends GalagaLevel {
 			}
 		}
 		createObstacles(screenSize, alienPositions);
-		myScene = setupLevelScene(screenSize.getX(), screenSize.getY(), BACKGROUND);
+		myScene = setupLevelScene();
 	}
 
 }
