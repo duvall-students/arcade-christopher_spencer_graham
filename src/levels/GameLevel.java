@@ -105,7 +105,8 @@ public abstract class GameLevel{
 	
 	//default step method
 	public void step(double elapsedTime) {
-
+		ArrayList<GameObject> remove = new ArrayList<GameObject>();
+		
 		//move the objects
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
@@ -113,9 +114,15 @@ public abstract class GameLevel{
 			
 		for(Collider c : colliders) {
 			for(GameObject x : gameObjects) {
-				c.collide(x);
+				if (c.collide(x) && obstacles.contains(x)) {
+					remove.add(x);
+					root.getChildren().remove(x.getView());
+				}
 			}
-		}	
+		}
+		
+		gameObjects.remove(remove.get(0));
+		obstacles.remove(remove.get(0));
 	}
 		
 	protected void createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {

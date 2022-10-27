@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import game_object.Brick;
-import game_object.Laser;
 import game_object.Paddle;
-import game_object.Spaceship;
 import game_object.Ball;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
@@ -38,6 +36,8 @@ public abstract class BreakoutLevel extends GameLevel {
 			try {
 				Brick newBrick = new Brick(DEFAULT_BRICK_IMAGE_PATH, screenSize, pos);
 				gameObjects.add(newBrick);
+				obstacles.add(newBrick);
+				//colliders.add(newBrick);
 			}
 			catch(FileNotFoundException e) {
 
@@ -51,6 +51,8 @@ public abstract class BreakoutLevel extends GameLevel {
 			try {
 				Ball newBall = new Ball(DEFAULT_BALL_IMAGE, screenSize, pos);
 				gameObjects.add(newBall);
+				movableTimes.add(newBall);
+				colliders.add(newBall);
 			}
 			catch(FileNotFoundException e) {	
 			}
@@ -63,7 +65,7 @@ public abstract class BreakoutLevel extends GameLevel {
 		try {
 			myPlayer = new Paddle(DEFAULT_PLAYER_IMAGE, screenSize, position);
 			gameObjects.add(myPlayer);
-			//movableKeyCodes.add(myPlayer);
+			//colliders.add(myPlayer);
 		}
 		catch(FileNotFoundException e) {
 
