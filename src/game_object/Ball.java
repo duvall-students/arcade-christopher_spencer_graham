@@ -28,6 +28,7 @@ public class Ball extends Projectile{
 		if (check) {
 			//remove a life and if there are still lives remaining reset
 			myVelocity = new Point2D(myVelocity.getX(), -1*myVelocity.getY());
+			//System.out.println(myVelocity);
 		}
 		return check;
 	}
