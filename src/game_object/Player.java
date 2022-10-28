@@ -13,35 +13,28 @@ public abstract class Player extends GameObject implements MovableKeyCode {
 	public static final int DEFAULT_LIVES = 3;
 	
 	protected int myLives = DEFAULT_LIVES;
-	protected Point2D startingPosition;
+	
+	protected static final int WIDTH = 20;
+	protected static final int HEIGHT = 20;
 
 	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
-		startingPosition = pos;
 	}
 	
 	public Player(String imagePath, double sizeWidth, double sizeHeight, Point2D pos, int lives) throws FileNotFoundException {
 		super(imagePath, sizeWidth, sizeHeight, pos);
-		startingPosition = pos;
 		myLives = lives;
 	}
 
 	@Override
 	public void move(KeyCode keyCode, int moveSpeed) {
 			
-	        if (keyCode == KeyCode.LEFT ) {
+	        if (keyCode == KeyCode.LEFT && myView.getX() > 0) {
 	        	myView.setX(myView.getX() - moveSpeed);
 	        }
-	        else if (keyCode == KeyCode.RIGHT ) {
+	        else if (keyCode == KeyCode.RIGHT) {
 	        	myView.setX(myView.getX() + moveSpeed);
 	        }
-
-	}
-	
-	public void resetPosition() {
-		myView.setX(startingPosition.getX());
-		myView.setY(startingPosition.getY());
-		
 
 	}
 	
