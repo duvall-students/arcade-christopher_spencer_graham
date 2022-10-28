@@ -49,7 +49,7 @@ public abstract class BreakoutLevel extends GameLevel {
 				Ball newBall = new Ball(DEFAULT_BALL_IMAGE, screenSize, pos);
 				gameObjects.add(newBall);
 				movableTimes.add(newBall);
-				colliders.add(newBall);
+				projectiles.add(newBall);
 			}
 			catch(FileNotFoundException e) {	
 			}

@@ -10,6 +10,7 @@ import java.util.List;
 import game_object.Collider;
 import game_object.GameObject;
 import game_object.Laser;
+import game_object.Ball;
 import game_object.Movable;
 import game_object.MovableKeyCode;
 import game_object.MovableTime;
@@ -118,6 +119,7 @@ public abstract class GameLevel{
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
 		}
+		obstacleloop:
 		for(Obstacle o : obstacles) {
 			//check if the obstacles collide with projectiles
 			for(Projectile p : projectiles) {
@@ -130,8 +132,9 @@ public abstract class GameLevel{
 					}
 					root.getChildren().remove(o.getView());
 				}
-				if(p.collide(myPlayer)) {
-					
+				if(p.collide(myPlayer) && p instanceof Ball) {
+					break obstacleloop;
+					//p.collide(myPlayer);
 				}
 			}
 			//check if obstacles collide with player
