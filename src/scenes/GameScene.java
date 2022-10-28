@@ -64,9 +64,9 @@ public class GameScene extends Application {
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
 		
-		myCurrentLevel = new GalagaLevelOne();
+		//myCurrentLevel = new GalagaLevelOne();
 		
-		//myCurrentLevel = new BreakoutLevelOne();
+		myCurrentLevel = new BreakoutLevelOne();
 
 		//myCurrentLevel.setupLevelScene();
 

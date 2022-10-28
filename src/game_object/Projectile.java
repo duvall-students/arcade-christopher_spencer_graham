@@ -9,6 +9,7 @@ public abstract class Projectile extends GameObject implements MovableTime{
 	protected Point2D myVelocity;
 	protected int myMoveSpeed;
 	
+	
 	public Projectile(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		super( imagePath, sizeWidth, sizeHeight, pos);
 	}
