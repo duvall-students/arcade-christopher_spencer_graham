@@ -1,10 +1,14 @@
 package levels;
 
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.List;
 
 import game_object.Brick;
+import game_object.Laser;
+import game_object.Obstacle;
 import game_object.Paddle;
+import game_object.Projectile;
 import game_object.Ball;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
@@ -49,7 +53,7 @@ public abstract class BreakoutLevel extends GameLevel {
 				Ball newBall = new Ball(DEFAULT_BALL_IMAGE, screenSize, pos);
 				gameObjects.add(newBall);
 				movableTimes.add(newBall);
-				colliders.add(newBall);
+				projectiles.add(newBall);
 			}
 			catch(FileNotFoundException e) {	
 			}
@@ -69,10 +73,30 @@ public abstract class BreakoutLevel extends GameLevel {
 		}
 
 	}
-	
+
 	@Override
 	protected void handleKeyInput(KeyCode code) {
 		myPlayer.move(code);
 	}
+
+//	@Override
+//	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
+//		obstacleloop:
+//			for(Obstacle o : obstacles) {
+//				//check if the obstacles collide with projectiles
+//				for(Projectile p : projectiles) {
+//					if (p.collide(o)) {
+//						playerScore += o.getScoreValue();
+//						removeFromAllLists(o);
+//						root.getChildren().remove(o.getView());
+//						scoreText.setText("Score: " + playerScore);
+//					}
+//					if(p.collide(myPlayer) && p instanceof Ball) {
+//						break obstacleloop;
+//						//p.collide(myPlayer);
+//					}
+//				}
+//			}
+//	}
 
 }

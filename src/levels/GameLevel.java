@@ -10,6 +10,7 @@ import java.util.List;
 import game_object.Collider;
 import game_object.GameObject;
 import game_object.Laser;
+import game_object.Ball;
 import game_object.Movable;
 import game_object.MovableKeyCode;
 import game_object.MovableTime;
@@ -53,6 +54,7 @@ public abstract class GameLevel{
 	protected Scene myScene;
 	protected Text livesText;
 	protected Text scoreText;
+	private int playerScore;
 	
 	
 	Group root;
@@ -67,6 +69,7 @@ public abstract class GameLevel{
 		movableKeyCodes = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		projectiles = new ArrayList<>();
+		playerScore = 0;
 		//ballStartingPositions = new ArrayList<Point2D>();
 		//playerStartingPosition = new Point2D(screenSize.getX()/2,(19*screenSize.getY())/20);
 	}
@@ -88,11 +91,6 @@ public abstract class GameLevel{
 			root.getChildren().add(t);
 		}
 
-		//setUpLevel();
-		//createLevel();
-		//createPlayer();
-		//createProjectiles();
-		//root.getChildren().add(myPlayer.getView()); 
 		Scene scene = new Scene(root, screenSize.getX(), screenSize.getY(), BACKGROUND_COLOR);
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		return scene;
@@ -118,27 +116,37 @@ public abstract class GameLevel{
 		for(MovableTime m : movableTimes) {	
 			m.move(elapsedTime);
 		}
+		
+		//checkForCollisions();
+		obstacleloop:
 		for(Obstacle o : obstacles) {
 			//check if the obstacles collide with projectiles
 			for(Projectile p : projectiles) {
 				if (p.collide(o)) {
 					//myScore += myBricks.get(i).getScoreValue();
-					removeFromAllLists(o);
+					playerScore += o.getScoreValue();
+					remove.add(o);
+					//removeFromAllLists(o);
 					if(p instanceof Laser){
 						root.getChildren().remove(p.getView());
-						removeFromAllLists(p);	
+						//removeFromAllLists(p);	
+						remove.add(p);
 					}
 					root.getChildren().remove(o.getView());
+					//up
+					scoreText.setText("Score: " + playerScore);
 				}
-				if(p.collide(myPlayer)) {
-					
+				if(p.collide(myPlayer) && p instanceof Ball) {
+					break obstacleloop;
+					//p.collide(myPlayer);
 				}
 			}
 			//check if obstacles collide with player
 			if(myPlayer.collide(o)) {
-				removeFromAllLists(o);
+				remove.add(o);
+				//removeFromAllLists(o);
 				root.getChildren().remove(o.getView());
-				updateLivesText();
+				livesText.setText("Lives: " + myPlayer.getLives());
 				
 				if(!myPlayer.isAlive()) {
 					//endGame
@@ -146,47 +154,45 @@ public abstract class GameLevel{
 				}
 			}
 		}
-		
+		removeFromAllLists(remove);
 		myScene.setRoot(root);
 	}
 	
-	protected void updateLivesText() {		
-		root.getChildren().remove(livesText);
-		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
-		root.getChildren().add(livesText);
-	}
+	//protected abstract void checkForCollisions();
 	
-	protected void removeFromAllLists(GameObject obj) {
-		gameObjects.remove(obj);
-		try {
-			obstacles.remove((Obstacle)obj);
-		}
-		catch(ClassCastException e) {
-			
-		}
-		try {
-			colliders.remove((Collider)obj);
-		}
-		catch(ClassCastException e) {
-			
-		}
-		try {
-			movableTimes.remove((MovableTime)obj);
-		}
-		catch(ClassCastException e) {
-			
-		}
-		try {
-			movableKeyCodes.remove((MovableKeyCode)obj);
-		}
-		catch(ClassCastException e) {
-			
-		}
-		try {
-			projectiles.remove((Projectile)obj);
-		}
-		catch(ClassCastException e) {
-			
+	protected void removeFromAllLists(ArrayList<GameObject> remove) {
+		for (int i=0; i < remove.size(); i++) {	
+			gameObjects.remove(remove.get(i));
+			try {
+				obstacles.remove(remove.get(i));
+			}
+			catch(ClassCastException e) {
+				
+			}
+			try {
+				colliders.remove(remove.get(i));
+			}
+			catch(ClassCastException e) {
+				
+			}
+			try {
+				movableTimes.remove(remove.get(i));
+			}
+			catch(ClassCastException e) {
+				
+			}
+			try {
+				movableKeyCodes.remove(remove.get(i));
+			}
+			catch(ClassCastException e) {
+				
+			}
+			try {
+				projectiles.remove(remove.get(i));
+			}
+			catch(ClassCastException e) {
+				
+			}
 		}
 		
 	}
