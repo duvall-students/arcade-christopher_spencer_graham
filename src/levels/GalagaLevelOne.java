@@ -12,7 +12,6 @@ public class GalagaLevelOne extends GalagaLevel {
 	protected final Point2D FIRST_ALIEN_POS = new Point2D(screenSize.getX()/NUM_ALIEN_COLS, screenSize.getY()/20);
 	protected final Point2D ALIEN_OFFSET = new Point2D(screenSize.getX()/NUM_ALIEN_COLS, screenSize.getY()/20);
 	protected final int NUM_ALIENS = NUM_ALIEN_ROWS * NUM_ALIEN_COLS;
-	protected final Point2D PLAYER_START_POS = new Point2D(screenSize.getX()/2, screenSize.getY()*.75);
 
 	public GalagaLevelOne() {
 		super();

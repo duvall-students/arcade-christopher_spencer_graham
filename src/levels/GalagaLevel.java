@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Callable;
 
 import game_object.Alien;
@@ -20,9 +21,13 @@ import javafx.scene.input.KeyCode;
 
 public abstract class GalagaLevel extends GameLevel {
 
-	protected static final String DEFAULT_ALIEN_IMAGE = "resources/galaga-enemy1.gif";
+	protected static final String[] ALIEN_IMAGES = {"resources/galaga-enemy1.gif",
+	                                                "resources/galaga-enemy2.gif",
+	                                                "resources/galaga-enemy3.gif"};
+	
 	protected static final String SPACESHIP_IMAGE = "resources/galaga-ship.gif";
 
+	protected final Point2D PLAYER_START_POS = new Point2D(screenSize.getX()/2, screenSize.getY()*.75);
 
 
 
@@ -37,7 +42,7 @@ public abstract class GalagaLevel extends GameLevel {
 	public void createObstacles(Point2D screenSize, List<Point2D> positions) {
 		for(Point2D pos : positions) {
 			try {
-				Alien newAlien = new Alien(DEFAULT_ALIEN_IMAGE, screenSize, pos);
+				Alien newAlien = new Alien(ALIEN_IMAGES[getRandomInRange(0, ALIEN_IMAGES.length)], screenSize, pos);
 				gameObjects.add(newAlien);
 				movableTimes.add(newAlien);
 				colliders.add(newAlien);
@@ -88,6 +93,10 @@ public abstract class GalagaLevel extends GameLevel {
 
 
 	}
+	protected int getRandomInRange (int min, int max) {
+		Random dice = new Random();
+        return min + dice.nextInt(max - min);
+    }
 
 	//@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
