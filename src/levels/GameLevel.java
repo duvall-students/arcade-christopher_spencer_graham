@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import functionality.HighScore;
 import game_object.Collider;
 import game_object.GameObject;
 import game_object.Laser;
@@ -28,6 +29,8 @@ import javafx.scene.text.Text;
 
 //Graham Young
 public abstract class GameLevel{
+
+	private static final String BREAKOUT_HIGH_SCORE_TXT = "BreakoutHighScore.txt";
 
 	protected GraphicsDevice gd[];
 
@@ -125,13 +128,10 @@ public abstract class GameLevel{
 			//check if the obstacles collide with projectiles
 			for(Projectile p : projectiles) {
 				if (p.collide(o)) {
-					//myScore += myBricks.get(i).getScoreValue();
 					playerScore += o.getScoreValue();
 					remove.add(o);
-					//removeFromAllLists(o);
 					if(p instanceof Laser){
 						root.getChildren().remove(p.getView());
-						//removeFromAllLists(p);	
 						remove.add(p);
 					}
 					root.getChildren().remove(o.getView());
@@ -140,21 +140,20 @@ public abstract class GameLevel{
 				}
 				if(p.collide(myPlayer) && p instanceof Ball) {
 					break obstacleloop;
-					//p.collide(myPlayer);
 				}
 			}
 			//check if obstacles collide with player
 			if(myPlayer.collide(o)) {
 				remove.add(o);
-				//removeFromAllLists(o);
 				root.getChildren().remove(o.getView());
 				livesText.setText("Lives: " + myPlayer.getLives());
 				
-				if(!myPlayer.isAlive()) {
-					//endGame
-					
-				}
 			}
+		}
+		
+		if(isLevelEnd()) {
+			
+			endLevel();
 		}
 		removeFromAllLists(remove);
 		myScene.setRoot(root);
@@ -166,9 +165,9 @@ public abstract class GameLevel{
 	@SuppressWarnings("rawtypes")
 	protected void removeFromAllLists(ArrayList<GameObject> remove) {
 		//create an array with every list in it
-		ArrayList[] allLists = {(ArrayList) texts, (ArrayList) gameObjects, 
-				(ArrayList) colliders, (ArrayList) movableTimes, 
-				(ArrayList) movableKeyCodes, (ArrayList) obstacles, (ArrayList) projectiles};
+		ArrayList[] allLists = {(ArrayList) texts, (ArrayList) gameObjects, (ArrayList) colliders, 
+					(ArrayList) movableTimes, (ArrayList) movableKeyCodes, (ArrayList) obstacles, 
+					(ArrayList) projectiles};
 		
 		//cross-reference remove with allLists and remove any mention of the objects in remove
 		for (GameObject g : remove) {	
@@ -181,9 +180,24 @@ public abstract class GameLevel{
 	}
 	
 	//returns true if the level should end
-	protected boolean levelEnd() {
+	protected boolean isLevelEnd() {
 		return !myPlayer.isAlive() || obstacles.size() == 0;
 	}
+	
+	
+	/*
+	 * 
+	 * change to a generic high score file
+	 * 
+	 */
+	private void endLevel() {
+		endLevel(BREAKOUT_HIGH_SCORE_TXT);
+	}
+	
+	protected void endLevel(String scoreFile) {
+		HighScore.setNewHighScore(playerScore, scoreFile);
+	}
+	
 	
     
 	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {

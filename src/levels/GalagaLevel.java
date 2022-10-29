@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
+import functionality.HighScore;
 import game_object.Alien;
 import game_object.Ball;
 import game_object.Brick;
@@ -20,6 +21,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 public abstract class GalagaLevel extends GameLevel {
+
+	private static final String GALAGA_HIGH_SCORE_TXT = "GalagaHighScore.txt";
 
 	protected static final String[] ALIEN_IMAGES = {"resources/galaga-enemy1.gif",
 	                                                "resources/galaga-enemy2.gif",
@@ -97,6 +100,10 @@ public abstract class GalagaLevel extends GameLevel {
 		Random dice = new Random();
         return min + dice.nextInt(max - min);
     }
+	
+	protected void endLevel() {
+		super.endLevel(GALAGA_HIGH_SCORE_TXT);
+	}
 
 	//@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
