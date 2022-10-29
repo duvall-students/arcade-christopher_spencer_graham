@@ -50,6 +50,8 @@ public abstract class GameLevel{
 	protected Collection<Obstacle> obstacles;
 	protected Collection<Projectile> projectiles;
 	
+	
+	
 	protected Player myPlayer;
 	protected Scene myScene;
 	protected Text livesText;
@@ -160,41 +162,27 @@ public abstract class GameLevel{
 	
 	//protected abstract void checkForCollisions();
 	
+	
+	@SuppressWarnings("rawtypes")
 	protected void removeFromAllLists(ArrayList<GameObject> remove) {
-		for (int i=0; i < remove.size(); i++) {	
-			gameObjects.remove(remove.get(i));
-			try {
-				obstacles.remove(remove.get(i));
-			}
-			catch(ClassCastException e) {
-				
-			}
-			try {
-				colliders.remove(remove.get(i));
-			}
-			catch(ClassCastException e) {
-				
-			}
-			try {
-				movableTimes.remove(remove.get(i));
-			}
-			catch(ClassCastException e) {
-				
-			}
-			try {
-				movableKeyCodes.remove(remove.get(i));
-			}
-			catch(ClassCastException e) {
-				
-			}
-			try {
-				projectiles.remove(remove.get(i));
-			}
-			catch(ClassCastException e) {
-				
+		//create an array with every list in it
+		ArrayList[] allLists = {(ArrayList) texts, (ArrayList) gameObjects, 
+				(ArrayList) colliders, (ArrayList) movableTimes, 
+				(ArrayList) movableKeyCodes, (ArrayList) obstacles, (ArrayList) projectiles};
+		
+		//cross-reference remove with allLists and remove any mention of the objects in remove
+		for (GameObject g : remove) {	
+			for(ArrayList c : allLists) {
+				if(c.contains(g)) {
+					c.remove(g);
+				}
 			}
 		}
-		
+	}
+	
+	//returns true if the level should end
+	protected boolean levelEnd() {
+		return !myPlayer.isAlive() || obstacles.size() == 0;
 	}
 	
     
