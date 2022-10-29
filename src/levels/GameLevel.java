@@ -111,6 +111,7 @@ public abstract class GameLevel{
 	public abstract void createProjectiles(Point2D screenSize, List<Point2D> positions);
 	
 	public abstract void createPlayer(Point2D screenSize, Point2D position);
+	
 	protected abstract void handleKeyInput(KeyCode code);
 	
 	//default step method
