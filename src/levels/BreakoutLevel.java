@@ -81,14 +81,17 @@ public abstract class BreakoutLevel extends GameLevel {
 		myPlayer.move(code);
 	}
 	
-	protected void endGame() {
+//	protected void endGame() {
+//		HighScore.setNewHighScore(playerScore, BREAKOUT_HIGH_SCORE_FILE_NAME);
+//		newBall.pauseVelocity();
+//		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
+//		texts.add(endGameText);
+//		root.getChildren().add(endGameText);
+//	}
+	
+	protected void setHighScore() {
 		HighScore.setNewHighScore(playerScore, BREAKOUT_HIGH_SCORE_FILE_NAME);
-		newBall.pauseVelocity();
-		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
-		texts.add(endGameText);
-		root.getChildren().add(endGameText);
 	}
-
 //	@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
 //		obstacleloop:
