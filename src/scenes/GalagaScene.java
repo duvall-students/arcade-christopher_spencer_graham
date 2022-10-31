@@ -27,12 +27,6 @@ import functionality.HighScore;
 public class GalagaScene extends GameScene {
 	private static final String GALAGA_HIGH_SCORE_FILE_NAME = "GalagaHighScore.txt";
 	
-	public void updateHighScore(int score) {
-		int previousHighScore =  HighScore.getCurrentHighScore(GALAGA_HIGH_SCORE_FILE_NAME);
-		if (score > previousHighScore) {
-			HighScore.setNewHighScore(score, GALAGA_HIGH_SCORE_FILE_NAME);
-		}
-	}
 	
 	
 }
