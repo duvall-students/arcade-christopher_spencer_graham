@@ -17,9 +17,7 @@ import javafx.scene.image.ImageView;
 public abstract class GameObject implements Collider {
 	
 	protected ImageView myView;
-
-	
-	
+	protected Point2D startingPosition;
 	
 	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
@@ -30,6 +28,7 @@ public abstract class GameObject implements Collider {
 
         myView.setX(pos.getX());
         myView.setY(pos.getY());
+        startingPosition = pos;
 
 	}
 	
@@ -43,6 +42,9 @@ public abstract class GameObject implements Collider {
 		return myView;
 	}
 	
+	public ImageView getImageView() {
+		return myView;
+	}
 	
 	public boolean isIntersecting(GameObject other) {
 		return this.getBounds().intersects(other.getBounds());
@@ -55,12 +57,8 @@ public abstract class GameObject implements Collider {
 	@Override
 	public boolean collide(GameObject other) {
 		
-		if(this.equals(other)) {
-			return false;
-		}
-		else {
-			return this.isIntersecting(other);
-		}
+		return this.isIntersecting(other);
+		
 	}
 
 	@Override
@@ -78,6 +76,11 @@ public abstract class GameObject implements Collider {
 	@Override
 	public String toString() {
 		return "GameObject [myView=" + myView + "]";
+	}
+	
+	public void resetPosition() {
+		myView.setX(startingPosition.getX());
+		myView.setY(startingPosition.getY());
 	}
 
 

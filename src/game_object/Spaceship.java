@@ -10,11 +10,7 @@ import javafx.scene.input.KeyCode;
 //Graham Young
 public class Spaceship extends Player {
 
-	public static final int SPACESHIP_MOVE_SPEED = 50;
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 20;
-	
-	
+	public static final int SPACESHIP_MOVE_SPEED = 10;
 	
 	public Spaceship(String imagePath, Point2D screenSize, Point2D pos) throws FileNotFoundException {
 		super(imagePath, screenSize.getX()/WIDTH, screenSize.getY()/HEIGHT, pos);
@@ -26,7 +22,8 @@ public class Spaceship extends Player {
 		boolean check = super.collide(other);
 		if (check) {
 			//remove a life and if there are still lives remaining reset
-			if (this.removeALife()) {
+			removeALife();
+			if (isAlive()) {
 				resetPosition();
 			}
 		}

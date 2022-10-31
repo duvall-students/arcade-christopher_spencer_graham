@@ -14,6 +14,7 @@ public class Alien extends Obstacle implements MovableTime{
 		super(imagePath, screenSize.getX()/50, screenSize.getY()/50, pos);
 		// TODO Auto-generated constructor stub
 		myVelocity = new Point2D(0, ALIEN_MOVE_SPEED);
+		myScoreValue = getRandomInRange(MIN_SCORE_VALUE, MAX_SCORE_VALUE);
 
 	}
 
