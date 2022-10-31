@@ -30,6 +30,7 @@ import functionality.HighScore;
 public class GalagaScene extends GameScene {
 	private static final String GALAGA_HIGH_SCORE_FILE_NAME = "GalagaHighScore.txt";
 	
+
 	
 	@Override
 	public void start (Stage stage) {
@@ -48,6 +49,7 @@ public class GalagaScene extends GameScene {
 			HighScore.setNewHighScore(score, GALAGA_HIGH_SCORE_FILE_NAME);
 		}
 	}
+
 	
 	
 }

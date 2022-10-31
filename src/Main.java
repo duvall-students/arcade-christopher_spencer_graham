@@ -11,6 +11,7 @@ public class Main {
 
   public static void main (String[] args) {
 
+
 	  HashMap<String, Class<? extends GameScene>> games = new HashMap<>();
 	  
 	  
@@ -22,8 +23,7 @@ public class Main {
 	  String userInput = console.nextLine();
 	  
 	  Application.launch(games.get(userInput), args);
-	  
-	  
+
   }
 
 

@@ -25,6 +25,8 @@ import levels.BreakoutLevelThree;
 import levels.GameLevel;
 
 
+import functionality.HighScore;
+
 
 //Graham Young
 
@@ -63,6 +65,7 @@ public abstract class GameScene extends Application {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
+
 	
 	private void step(double elapsedTime) {
 		myCurrentLevel.step(elapsedTime);
@@ -84,6 +87,7 @@ public abstract class GameScene extends Application {
 		
 	}
 	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

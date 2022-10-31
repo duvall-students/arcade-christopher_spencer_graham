@@ -23,6 +23,8 @@ public class BreakoutScene extends GameScene {
 	protected BreakoutLevelOne breakoutLeveOne;
 	protected BreakoutLevelTwo breakoutLeveTwo;
 	protected BreakoutLevelThree breakoutLeveThree;
+	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+
 	
 //	@Override
 //	public void start(Stage stage) {
