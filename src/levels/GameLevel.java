@@ -18,6 +18,8 @@ import game_object.MovableTime;
 import game_object.Obstacle;
 import game_object.Player;
 import game_object.Projectile;
+import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -39,7 +41,7 @@ public abstract class GameLevel{
 
 	protected static final int REGULAR_FONT_SIZE = 20;
 	protected static final int GAME_TITLE_FONT_SIZE = 75;
-	protected static final int END_GAME_TITLE_FONT_SIZE = 1000;
+	protected static final int END_GAME_TITLE_FONT_SIZE = 200;
 	protected static final String TEXT_FONT = "Arial";
 	protected static final Color TEXT_COLOR = Color.WHITE;
 	protected static final Color BACKGROUND_COLOR = Color.AZURE;
@@ -59,10 +61,12 @@ public abstract class GameLevel{
 	protected Scene myScene;
 	protected Text livesText;
 	protected Text scoreText;
-	private int playerScore;
+	protected Text endGameText;
+	protected int playerScore;
 	
 	
 	Group root;
+	Group endRoot;
 	
 	public GameLevel() {
 		gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
@@ -142,6 +146,13 @@ public abstract class GameLevel{
 				if(p.collide(myPlayer) && p instanceof Ball) {
 					break obstacleloop;
 				}
+				
+				if (p.getImageView().getY() > screenSize.getY()) {
+					myPlayer.removeALife();
+					livesText.setText("Lives: " + myPlayer.getLives());
+					myPlayer.resetPosition();
+					p.resetPosition();
+				}
 			}
 			//check if obstacles collide with player
 			if(myPlayer.collide(o)) {
@@ -153,9 +164,14 @@ public abstract class GameLevel{
 		}
 		
 		if(isLevelEnd()) {
-			
-			endLevel();
+			if (myPlayer.getLives() == 0) {
+				endGame();
+			}
+			else {
+				endLevel();
+			}
 		}
+		
 		removeFromAllLists(remove);
 		myScene.setRoot(root);
 	}
@@ -191,16 +207,12 @@ public abstract class GameLevel{
 	 * change to a generic high score file
 	 * 
 	 */
+	protected abstract void endGame();
+	
 	private void endLevel() {
-		endLevel(BREAKOUT_HIGH_SCORE_TXT);
+		
 	}
 	
-	protected void endLevel(String scoreFile) {
-		HighScore.setNewHighScore(playerScore, scoreFile);
-	}
-	
-	
-    
 	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
 		newDisplay.setFont(new Font(textFont, textSize));

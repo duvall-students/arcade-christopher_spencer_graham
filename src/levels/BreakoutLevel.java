@@ -21,6 +21,8 @@ public abstract class BreakoutLevel extends GameLevel {
 	private static final String DEFAULT_PLAYER_IMAGE = "resources/paddle.gif";
 	private static final String BREAKOUT_TITLE = "BREAKOUT";
 	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+	
+	Ball newBall;
 
 	//private HighScore highScore;
 
@@ -50,7 +52,7 @@ public abstract class BreakoutLevel extends GameLevel {
 	public void createProjectiles(Point2D screenSize, List<Point2D> positions) {
 		for (Point2D pos : positions) {	
 			try {
-				Ball newBall = new Ball(DEFAULT_BALL_IMAGE, screenSize, pos);
+				newBall = new Ball(DEFAULT_BALL_IMAGE, screenSize, pos);
 				gameObjects.add(newBall);
 				movableTimes.add(newBall);
 				projectiles.add(newBall);
@@ -77,6 +79,14 @@ public abstract class BreakoutLevel extends GameLevel {
 	@Override
 	protected void handleKeyInput(KeyCode code) {
 		myPlayer.move(code);
+	}
+	
+	protected void endGame() {
+		HighScore.setNewHighScore(playerScore, BREAKOUT_HIGH_SCORE_FILE_NAME);
+		newBall.pauseVelocity();
+		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
+		texts.add(endGameText);
+		root.getChildren().add(endGameText);
 	}
 
 //	@Override
