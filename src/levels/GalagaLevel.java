@@ -101,8 +101,12 @@ public abstract class GalagaLevel extends GameLevel {
         return min + dice.nextInt(max - min);
     }
 	
-	protected void endLevel() {
-		super.endLevel(GALAGA_HIGH_SCORE_TXT);
+	protected void endGame() {
+		HighScore.setNewHighScore(playerScore, GALAGA_HIGH_SCORE_TXT);
+		//newBall.pauseVelocity();
+		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
+		texts.add(endGameText);
+		root.getChildren().add(endGameText);
 	}
 
 	//@Override
