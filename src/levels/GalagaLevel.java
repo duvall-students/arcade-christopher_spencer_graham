@@ -20,6 +20,8 @@ import game_object.Spaceship;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
+//Graham Young
+
 public abstract class GalagaLevel extends GameLevel {
 
 	private static final String GALAGA_HIGH_SCORE_TXT = "GalagaHighScore.txt";
@@ -108,7 +110,6 @@ public abstract class GalagaLevel extends GameLevel {
 		texts.add(endGameText);
 		root.getChildren().add(endGameText);
 	}
-
 	//@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
 //		for(Obstacle o : obstacles) {

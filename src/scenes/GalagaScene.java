@@ -33,9 +33,6 @@ public class GalagaScene extends GameScene {
 			HighScore.setNewHighScore(score, GALAGA_HIGH_SCORE_FILE_NAME);
 		}
 	}
-	@Override
-	protected void createDisplays() {
-		createTextDisplay(0.4*screenWidth, screenHeight/15, TEXT_FONT, GAME_TITLE_FONT_SIZE, "GALAGA", TEXT_COLOR, root);
-	}
+	
 	
 }
