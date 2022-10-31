@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import functionality.HighScore;
+
 
 //Graham Young
 
@@ -87,7 +89,12 @@ public class GameScene extends Application {
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-
+	public void updateHighScore(int score, String fileName) {
+		int previousHighScore =  HighScore.getCurrentHighScore(fileName);
+		if (score > previousHighScore) {
+			HighScore.setNewHighScore(score, fileName);
+		}
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
