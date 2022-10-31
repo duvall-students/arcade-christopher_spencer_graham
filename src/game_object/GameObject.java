@@ -42,6 +42,9 @@ public abstract class GameObject implements Collider {
 		return myView;
 	}
 	
+	public ImageView getImageView() {
+		return myView;
+	}
 	
 	public boolean isIntersecting(GameObject other) {
 		return this.getBounds().intersects(other.getBounds());

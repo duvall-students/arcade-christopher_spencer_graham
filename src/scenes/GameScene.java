@@ -33,6 +33,8 @@ import javafx.util.Duration;
 import levels.BreakoutLevel;
 import levels.GalagaLevelOne;
 import levels.BreakoutLevelOne;
+import levels.BreakoutLevelTwo;
+import levels.BreakoutLevelThree;
 import levels.GameLevel;
 
 import java.io.FileInputStream;
@@ -58,15 +60,19 @@ public class GameScene extends Application {
 
 	private HashMap<String, GameLevel> levels = new HashMap<>();
 	protected GameLevel myCurrentLevel;
-	
+	Timeline animation;
 	
 	@Override
 	public void start (Stage stage) {
 		// attach scene to the stage and display it
 		
-		myCurrentLevel = new GalagaLevelOne();
+		//myCurrentLevel = new GalagaLevelOne();
 		
-		//myCurrentLevel = new BreakoutLevelOne();
+		myCurrentLevel = new BreakoutLevelOne();
+		
+		//myCurrentLevel = new BreakoutLevelTwo();
+		
+		//myCurrentLevel = new BreakoutLevelThree();
 
 		//myCurrentLevel.setupLevelScene();
 
@@ -76,12 +82,11 @@ public class GameScene extends Application {
 
 		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
-		Timeline animation = new Timeline();
+		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);

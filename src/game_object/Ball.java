@@ -44,5 +44,14 @@ public class Ball extends Projectile{
 		myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
 		myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 	}
+	
+	public void resetVelocity() {
+		myVelocity = new Point2D(BALL_MOVE_SPEED, -BALL_MOVE_SPEED);
+	}
+	
+	public void pauseVelocity() {
+		myVelocity = new Point2D(0, 0);
+	}
+
 
 }
