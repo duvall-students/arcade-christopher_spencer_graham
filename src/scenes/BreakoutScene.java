@@ -19,37 +19,14 @@ import levels.GameLevel;
 // Name: Christopher Boyette
 
 public class BreakoutScene extends GameScene {
-	// some things we need to remember during our game
-	protected BreakoutLevelOne breakoutLeveOne;
-	protected BreakoutLevelTwo breakoutLeveTwo;
-	protected BreakoutLevelThree breakoutLeveThree;
-	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+	@Override
+	public void start (Stage stage) {
+		levels.offer(new BreakoutLevelOne());
+		levels.offer(new BreakoutLevelTwo());
+		levels.offer(new BreakoutLevelThree());
+		super.start(stage);
 
-	
-//	@Override
-//	public void start(Stage stage) {
-		//breakoutLeveOne = new BreakoutLevelOne();
-		//breakoutLeveTwo = new BreakoutLevelTwo();
-		//breakoutLeveThree = new BreakoutLevelThree();
-//		stage.setScene(breakoutLeveOne.setupLevelScene());
-//		stage.show();
-//		// attach "game loop" to timeline to play it (basically just calling step() method repeatedly forever)
-//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> myCurrentLevel.step(SECOND_DELAY));
-//		Timeline animation = new Timeline();
-//		animation.setCycleCount(Timeline.INDEFINITE);
-//		animation.getKeyFrames().add(frame);
-//		animation.play();
-//	}
-	
-//	protected void setupLevel(int width, int height) {
-//		
-//	}
-//	
-//	@Override
-//	protected void step (double elapsedTime) {
-//		myPlayer.move(PLAYER_MOVE_LEFT, PLAYER_MOVE_SPEED);
-//		myPlayer.move(PLAYER_MOVE_RIGHT, PLAYER_MOVE_SPEED);
-//	}
+	}
 
 
 }

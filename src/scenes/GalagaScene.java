@@ -30,8 +30,6 @@ import functionality.HighScore;
 public class GalagaScene extends GameScene {
 	private static final String GALAGA_HIGH_SCORE_FILE_NAME = "GalagaHighScore.txt";
 	
-
-	
 	@Override
 	public void start (Stage stage) {
 		levels.offer(new GalagaLevelOne());
@@ -41,12 +39,10 @@ public class GalagaScene extends GameScene {
 
 	}
 	
-
-	
 	public void updateHighScore(int score) {
-		int previousHighScore =  HighScore.getCurrentHighScore(GALAGA_HIGH_SCORE_FILE_NAME);
+		int previousHighScore =  HighScore.getCurrentScore(GALAGA_HIGH_SCORE_FILE_NAME);
 		if (score > previousHighScore) {
-			HighScore.setNewHighScore(score, GALAGA_HIGH_SCORE_FILE_NAME);
+			HighScore.setNewScore(score, GALAGA_HIGH_SCORE_FILE_NAME);
 		}
 	}
 

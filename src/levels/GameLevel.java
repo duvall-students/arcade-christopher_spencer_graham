@@ -60,7 +60,9 @@ public abstract class GameLevel{
 	protected Player myPlayer;
 	protected Scene myScene;
 	protected Text livesText;
-	protected Text scoreText;
+	protected Text currentScoreText;
+	protected Text highScoreText;
+	protected Text gameTitleText;
 	protected Text endGameText;
 	protected int playerScore;
 	
@@ -87,10 +89,8 @@ public abstract class GameLevel{
 
 		//root.getChildren().add(myPlayer.getView());
 		root = new Group();
-		scoreText = createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + PLAYER_STARTING_SCORE, TEXT_COLOR, root);
 		livesText = createTextDisplay((2*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Lives: " + myPlayer.getLives(), TEXT_COLOR, root);
 		texts.add(livesText);
-		texts.add(scoreText);
 
 		for(GameObject g : gameObjects) {
 			root.getChildren().add(g.getView());
@@ -120,7 +120,7 @@ public abstract class GameLevel{
 	
 	//default step method
 	public void step(double elapsedTime) {
-		ArrayList<GameObject> remove = new ArrayList<GameObject>();
+		ArrayList<GameObject> removeObject = new ArrayList<GameObject>();
 		
 		//move the objects
 		for(MovableTime m : movableTimes) {	
@@ -134,14 +134,14 @@ public abstract class GameLevel{
 			for(Projectile p : projectiles) {
 				if (p.collide(o)) {
 					playerScore += o.getScoreValue();
-					remove.add(o);
+					removeObject.add(o);
 					if(p instanceof Laser){
-						root.getChildren().remove(p.getView());
-						remove.add(p);
+//						root.getChildren().remove(p.getView());
+						removeObject.add(p);
 					}
-					root.getChildren().remove(o.getView());
+//					root.getChildren().remove(o.getView());
 					//up
-					scoreText.setText("Score: " + playerScore);
+					currentScoreText.setText("Score: " + playerScore);
 				}
 				if(p.collide(myPlayer) && p instanceof Ball) {
 					break obstacleloop;
@@ -156,33 +156,35 @@ public abstract class GameLevel{
 			}
 			//check if obstacles collide with player
 			if(myPlayer.collide(o)) {
-				remove.add(o);
-				root.getChildren().remove(o.getView());
+				removeObject.add(o);
+//				root.getChildren().remove(o.getView());
 				livesText.setText("Lives: " + myPlayer.getLives());
 				
 			}
 		}
 
 		
-		removeFromAllLists(remove);
+		removeFromAllLists(removeObject);
 		myScene.setRoot(root);
+		setCurrentScore();
 	}
 	
 	//protected abstract void checkForCollisions();
 	
 	
 	@SuppressWarnings("rawtypes")
-	protected void removeFromAllLists(Collection<GameObject> remove) {
+	protected void removeFromAllLists(ArrayList<GameObject> removeObject) {
 		//create an array with every list in it
 		ArrayList[] allLists = {(ArrayList) texts, (ArrayList) gameObjects, (ArrayList) colliders, 
 					(ArrayList) movableTimes, (ArrayList) movableKeyCodes, (ArrayList) obstacles, 
 					(ArrayList) projectiles};
 		
 		//cross-reference remove with allLists and remove any mention of the objects in remove
-		for (GameObject g : remove) {	
+		for (int i = 0; i < removeObject.size(); i++) {	
 			for(ArrayList c : allLists) {
-				if(c.contains(g)) {
-					c.remove(g);
+				if(c.contains(removeObject.get(i))) {
+					c.remove(removeObject.get(i));
+					root.getChildren().remove(removeObject.get(i).getView());
 				}
 			}
 		}
@@ -206,15 +208,22 @@ public abstract class GameLevel{
 	
 	public void endGame() {
 		setHighScore();
-		removeFromAllLists(gameObjects);
+		resetCurrentScore();
+		ArrayList<GameObject> removeObject = new ArrayList<GameObject>();
+		for (GameObject g: gameObjects) {
+			removeObject.add(g);
+		}
+		removeFromAllLists(removeObject);
 		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
 		texts.add(endGameText);
 		root.getChildren().add(endGameText);
 	}
 	
-
+	protected abstract void resetCurrentScore();
 	
 	protected abstract void setHighScore();
+	
+	public abstract void setCurrentScore();
 	
 	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();

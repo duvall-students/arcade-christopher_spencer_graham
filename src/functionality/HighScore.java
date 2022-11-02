@@ -13,7 +13,7 @@ public class HighScore {
 
 
 
-	public static void setNewHighScore(int score, String textFileName) {
+	public static void setNewScore(int score, String textFileName) {
 		// This code was adapted from: https://www.tutorialspoint.com/how-to-overwrite-a-line-in-a-txt-file-using-java#:~:text=Invoke%20the%20replaceAll()%20method,(new%20line)%20as%20parameters.&text=Instantiate%20the%20FileWriter%20class.,using%20the%20append()%20method.
 		//		public static void main(String args[]) throws IOException {
 		//		      //Instantiating the File class
@@ -66,7 +66,7 @@ public class HighScore {
 		}
 	}
 
-	public static int getCurrentHighScore(String textFileName) {
+	public static int getCurrentScore(String textFileName) {
 		int currentHighScore = 0;
 		try {
 			Scanner scan = new Scanner(new File(textFileName));

@@ -16,28 +16,35 @@ import functionality.HighScore;
 
 public abstract class BreakoutLevel extends GameLevel {
 
-	protected static final String DEFAULT_BRICK_IMAGE_PATH = "resources/brick1.gif";
+	protected static final String LEVEL_ONE_BRICK_IMAGE_PATH = "resources/brick1.gif";
+	protected static final String LEVEL_TWO_BRICK_IMAGE_PATH = "resources/brick2.gif";
+	protected static final String LEVEL_THREE_BRICK_IMAGE_PATH = "resources/brick4.gif";
 	private static final String DEFAULT_BALL_IMAGE = "resources/ball.gif";
 	private static final String DEFAULT_PLAYER_IMAGE = "resources/paddle.gif";
 	private static final String BREAKOUT_TITLE = "BREAKOUT";
-	private static final String BREAKOUT_HIGH_SCORE_FILE_NAME = "BreakoutHighScore.txt";
+	private static final String BREAKOUT_HIGH_SCORE_TXT = "BreakoutHighScore.txt";
+	private static final String BREAKOUT_CURRENT_SCORE_TXT = "BreakoutCurrentScore.txt";
 	
-	Ball newBall;
+	private Ball newBall;
 
 	//private HighScore highScore;
 
 	public BreakoutLevel() {
 		super();
 		//createProjectilePositions();
-		createTextDisplay((17.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: " + HighScore.getCurrentHighScore(BREAKOUT_HIGH_SCORE_FILE_NAME), TEXT_COLOR, root);
-		createTextDisplay((4*screenSize.getX())/10, screenSize.getY()/10, TEXT_FONT, GAME_TITLE_FONT_SIZE, BREAKOUT_TITLE, TEXT_COLOR, root);
+		currentScoreText = createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + HighScore.getCurrentScore(BREAKOUT_CURRENT_SCORE_TXT), TEXT_COLOR, root);
+		highScoreText = createTextDisplay((17.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: " + HighScore.getCurrentScore(BREAKOUT_HIGH_SCORE_TXT), TEXT_COLOR, root);
+		gameTitleText = createTextDisplay((4*screenSize.getX())/10, screenSize.getY()/10, TEXT_FONT, GAME_TITLE_FONT_SIZE, BREAKOUT_TITLE, TEXT_COLOR, root);
+		texts.add(currentScoreText);
+		texts.add(highScoreText);
+		texts.add(gameTitleText);
 	}
 
 	@Override
 	public void createObstacles(Point2D screenSize, List<Point2D> positions) {
 		for (Point2D pos : positions) {
 			try {
-				Brick newBrick = new Brick(DEFAULT_BRICK_IMAGE_PATH, screenSize, pos);
+				Brick newBrick = new Brick(LEVEL_ONE_BRICK_IMAGE_PATH, screenSize, pos);
 				gameObjects.add(newBrick);
 				obstacles.add(newBrick);
 				//colliders.add(newBrick);
@@ -90,8 +97,20 @@ public abstract class BreakoutLevel extends GameLevel {
 //	}
 	
 	protected void setHighScore() {
-		HighScore.setNewHighScore(playerScore, BREAKOUT_HIGH_SCORE_FILE_NAME);
+		int currentHighScore = HighScore.getCurrentScore(BREAKOUT_HIGH_SCORE_TXT);
+		if (playerScore > currentHighScore) {
+			HighScore.setNewScore(playerScore, BREAKOUT_HIGH_SCORE_TXT);
+		}
 	}
+	
+	public void setCurrentScore() {
+		HighScore.setNewScore(playerScore, BREAKOUT_CURRENT_SCORE_TXT);
+	}
+	
+	protected void resetCurrentScore() {
+		HighScore.setNewScore(PLAYER_STARTING_SCORE, BREAKOUT_CURRENT_SCORE_TXT);
+	}
+	
 //	@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
 //		obstacleloop:
