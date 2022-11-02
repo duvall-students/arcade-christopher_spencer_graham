@@ -21,7 +21,7 @@ public class Main {
 	  Scanner console = new Scanner(System.in);
 	  System.out.println("Enter 'Galaga' to play Galaga or 'Breakout' to play Breakout");
 	  String userInput = console.nextLine();
-	  
+	  console.close();
 	  Application.launch(games.get(userInput), args);
 
   }

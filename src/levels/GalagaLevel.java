@@ -25,6 +25,8 @@ import javafx.scene.input.KeyCode;
 public abstract class GalagaLevel extends GameLevel {
 
 	private static final String GALAGA_HIGH_SCORE_TXT = "GalagaHighScore.txt";
+	private static final String GALAGA_CURRENT_SCORE_TXT = "GalagaCurrentScore.txt";
+	private static final String GALAGA_TITLE = "GALAGA";
 
 	protected static final String[] ALIEN_IMAGES = {"resources/galaga-enemy1.gif",
 	                                                "resources/galaga-enemy2.gif",
@@ -40,7 +42,12 @@ public abstract class GalagaLevel extends GameLevel {
 
 
 	public GalagaLevel() {
-
+		currentScoreText = createTextDisplay((15.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "Score: " + HighScore.getCurrentScore(GALAGA_CURRENT_SCORE_TXT), TEXT_COLOR, root);
+		highScoreText = createTextDisplay((17.5*screenSize.getX())/20, screenSize.getY()/20, TEXT_FONT, REGULAR_FONT_SIZE, "High Score: " + HighScore.getCurrentScore(GALAGA_HIGH_SCORE_TXT), TEXT_COLOR, root);
+		gameTitleText = createTextDisplay((4*screenSize.getX())/10, screenSize.getY()/10, TEXT_FONT, GAME_TITLE_FONT_SIZE, GALAGA_TITLE, TEXT_COLOR, root);
+		texts.add(currentScoreText);
+		texts.add(highScoreText);
+		texts.add(gameTitleText);
 	}
 
 	@Override
@@ -112,8 +119,17 @@ public abstract class GalagaLevel extends GameLevel {
 //	}
 	
 	protected void setHighScore() {
-		HighScore.setNewHighScore(playerScore, GALAGA_HIGH_SCORE_TXT);
+		HighScore.setNewScore(playerScore, GALAGA_HIGH_SCORE_TXT);
 	}
+
+	public void setCurrentScore() {
+		HighScore.setNewScore(playerScore, GALAGA_CURRENT_SCORE_TXT);
+	}
+	
+	protected void resetCurrentScore() {
+		HighScore.setNewScore(PLAYER_STARTING_SCORE, GALAGA_CURRENT_SCORE_TXT);
+	}
+	
 	//@Override
 //	protected void checkForCollisions(Collection<Obstacle> obstacles, Collection<Projectile> projectiles) {
 //		for(Obstacle o : obstacles) {
