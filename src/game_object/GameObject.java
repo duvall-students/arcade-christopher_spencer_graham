@@ -1,6 +1,8 @@
 package game_object;
 
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Objects;
@@ -18,6 +20,9 @@ public abstract class GameObject implements Collider {
 	
 	protected ImageView myView;
 	protected Point2D startingPosition;
+	protected GraphicsDevice gd[];
+	protected Point2D screenSize;
+	
 	
 	public GameObject(String imagePath, double sizeWidth, double sizeHeight, Point2D pos) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imagePath));
@@ -29,6 +34,8 @@ public abstract class GameObject implements Collider {
         myView.setX(pos.getX());
         myView.setY(pos.getY());
         startingPosition = pos;
+        gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+		screenSize = new Point2D((9*gd[0].getDisplayMode().getWidth())/10, (9*gd[0].getDisplayMode().getHeight())/10);
 
 	}
 	
