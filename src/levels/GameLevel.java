@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import functionality.HighScore;
 import game_object.Collider;
@@ -234,6 +235,11 @@ public abstract class GameLevel{
 		newDisplay.setStroke(colorOfText);
 		return newDisplay;
 	}
+	
+	protected int getRandomInRange (int min, int max) {
+		Random dice = new Random();
+        return min + dice.nextInt(max - min);
+    }
 	
 	
 	

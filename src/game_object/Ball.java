@@ -20,7 +20,7 @@ public class Ball extends Projectile{
 		super(imagePath, screenSize.getX()/38, screenSize.getX()/38, pos);
 		screensize = screenSize;
 		myMoveSpeed = BALL_MOVE_SPEED;
-		myVelocity = new Point2D(BALL_MOVE_SPEED, -BALL_MOVE_SPEED);
+		myVelocity = new Point2D(BALL_MOVE_SPEED, -1*BALL_MOVE_SPEED);
 
 	}
 	
@@ -30,6 +30,7 @@ public class Ball extends Projectile{
 		if (check) {
 			//remove a life and if there are still lives remaining reset
 			myVelocity = new Point2D(myVelocity.getX(), -1*myVelocity.getY());
+			myView.setY(myView.getY()-10);
 			//System.out.println(myVelocity);
 		}
 		return check;
@@ -43,17 +44,15 @@ public class Ball extends Projectile{
 		else if (myView.getY() < screensize.getY()/10) {
 			myVelocity = new Point2D(myVelocity.getX() + getRandomInRange (RANDOM_CHANGE_VELOCITY_LOWER_BOUND, RANDOM_CHANGE_VELOCITY_UPPER_BOUND), -1*myVelocity.getY());
 		}
+		else if (myView.getY() > screensize.getY()) {
+			resetVelocity();
+		}
 		myView.setX(myView.getX() + myVelocity.getX() * elapsedTime);
 		myView.setY(myView.getY() + myVelocity.getY() * elapsedTime);
 	}
 	
 	public void resetVelocity() {
-		myVelocity = new Point2D(BALL_MOVE_SPEED, -BALL_MOVE_SPEED);
+		myVelocity = new Point2D(BALL_MOVE_SPEED, -1*BALL_MOVE_SPEED);
 	}
-	
-	public void pauseVelocity() {
-		myVelocity = new Point2D(0, 0);
-	}
-
 
 }

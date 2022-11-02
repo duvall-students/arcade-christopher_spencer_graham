@@ -9,6 +9,7 @@ import game_object.Laser;
 import game_object.Obstacle;
 import game_object.Paddle;
 import game_object.Projectile;
+import game_object.Alien;
 import game_object.Ball;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
@@ -18,7 +19,7 @@ public abstract class BreakoutLevel extends GameLevel {
 
 	protected static final String LEVEL_ONE_BRICK_IMAGE_PATH = "resources/brick1.gif";
 	protected static final String LEVEL_TWO_BRICK_IMAGE_PATH = "resources/brick2.gif";
-	protected static final String LEVEL_THREE_BRICK_IMAGE_PATH = "resources/brick4.gif";
+	protected static final String LEVEL_THREE_BRICK_IMAGE_PATH = "resources/brick3.gif";
 	private static final String DEFAULT_BALL_IMAGE = "resources/ball.gif";
 	private static final String DEFAULT_PLAYER_IMAGE = "resources/paddle.gif";
 	private static final String BREAKOUT_TITLE = "BREAKOUT";
@@ -26,6 +27,10 @@ public abstract class BreakoutLevel extends GameLevel {
 	private static final String BREAKOUT_CURRENT_SCORE_TXT = "BreakoutCurrentScore.txt";
 	
 	private Ball newBall;
+	
+	protected static final String[] BRICK_IMAGES = {LEVEL_ONE_BRICK_IMAGE_PATH,
+			LEVEL_TWO_BRICK_IMAGE_PATH,
+			LEVEL_THREE_BRICK_IMAGE_PATH};
 
 	//private HighScore highScore;
 
@@ -44,7 +49,7 @@ public abstract class BreakoutLevel extends GameLevel {
 	public void createObstacles(Point2D screenSize, List<Point2D> positions) {
 		for (Point2D pos : positions) {
 			try {
-				Brick newBrick = new Brick(LEVEL_ONE_BRICK_IMAGE_PATH, screenSize, pos);
+				Brick newBrick = new Brick(BRICK_IMAGES[getRandomInRange(0, BRICK_IMAGES.length)], screenSize, pos);
 				gameObjects.add(newBrick);
 				obstacles.add(newBrick);
 				//colliders.add(newBrick);

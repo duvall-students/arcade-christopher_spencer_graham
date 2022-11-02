@@ -30,10 +30,10 @@ public abstract class Player extends GameObject implements MovableKeyCode {
 	@Override
 	public void move(KeyCode keyCode, int moveSpeed) {
 			
-	        if (keyCode == KeyCode.LEFT && myView.getX() > 0) {
+	        if (keyCode == KeyCode.LEFT && myView.getX() > screenSize.getX()/100) {
 	        	myView.setX(myView.getX() - moveSpeed);
 	        }
-	        else if (keyCode == KeyCode.RIGHT) {
+	        else if (keyCode == KeyCode.RIGHT && myView.getX() < (92*screenSize.getX()/100)) {
 	        	myView.setX(myView.getX() + moveSpeed);
 	        }
 
