@@ -162,15 +162,7 @@ public abstract class GameLevel{
 				
 			}
 		}
-		
-		if(isLevelEnd()) {
-			if (myPlayer.getLives() == 0) {
-				endGame();
-			}
-			else {
-				endLevel();
-			}
-		}
+
 		
 		removeFromAllLists(remove);
 		myScene.setRoot(root);
@@ -180,7 +172,7 @@ public abstract class GameLevel{
 	
 	
 	@SuppressWarnings("rawtypes")
-	protected void removeFromAllLists(ArrayList<GameObject> remove) {
+	protected void removeFromAllLists(Collection<GameObject> remove) {
 		//create an array with every list in it
 		ArrayList[] allLists = {(ArrayList) texts, (ArrayList) gameObjects, (ArrayList) colliders, 
 					(ArrayList) movableTimes, (ArrayList) movableKeyCodes, (ArrayList) obstacles, 
@@ -197,21 +189,32 @@ public abstract class GameLevel{
 	}
 	
 	//returns true if the level should end
-	protected boolean isLevelEnd() {
+	public boolean isLevelEnd() {
 		return !myPlayer.isAlive() || obstacles.size() == 0;
 	}
 	
+	public boolean isGameEnd() {
+		return myPlayer.getLives() == 0;
+	}
 	
 	/*
 	 * 
 	 * change to a generic high score file
 	 * 
 	 */
-	protected abstract void endGame();
+
 	
-	private void endLevel() {
-		
+	public void endGame() {
+		setHighScore();
+		removeFromAllLists(gameObjects);
+		endGameText = createTextDisplay((0.25*screenSize.getX())/2, screenSize.getY()/2, TEXT_FONT, END_GAME_TITLE_FONT_SIZE, "GAME OVER", TEXT_COLOR, root);
+		texts.add(endGameText);
+		root.getChildren().add(endGameText);
 	}
+	
+
+	
+	protected abstract void setHighScore();
 	
 	protected Text createTextDisplay(double xPosition, double yPosition, String textFont, int textSize, String textToDisplay, Color colorOfText, Group gameSceneImages) {
 		Text newDisplay = new Text();
